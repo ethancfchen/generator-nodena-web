@@ -1,0 +1,61 @@
+{
+  "root": "./",
+  "server": {
+    "port": 8080,
+    "index": "index.html",
+    "https": false
+  },
+  "proxy": [],
+  "globals": {
+    "pug": {},
+    "sass": {},
+    "js": {},
+    "extras": {}
+  },
+  "preprocess": {
+    "filter": {
+      "sass": ["**/*.scss"],
+      "js": ["**/*.js"],
+      "extras": ["!**/*"]
+    }
+  },
+  "sass": {
+    "includePaths": []
+  },
+  "doiuse": {
+    "browsers": [
+      "last 2 version",
+      "> 5%",
+      "not ie < 11",
+      "not ie_mob < 11"
+    ]
+  },
+  "modernizr": false,
+  "uglify": {
+    "preserveComments": "license"
+  },
+  "imagemin": {
+    "main": {
+      "verbose": true
+    },
+    "plugins": {
+      "gifsicle": {
+        "interlaced": true
+      },
+      "jpegtran": {
+        "progressive": true
+      },
+      "optipng": { },
+      "svgo": { }
+    }
+  },
+  "copy": [],
+  "robots": {
+    "allow": ["/"],
+    "disallow": []
+  },
+  "local": { },
+  "bypass": { },
+  "stage": { },
+  "live": { }
+}
