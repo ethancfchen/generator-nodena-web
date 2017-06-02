@@ -27,7 +27,7 @@ function isFileExist(path) {
   return fs.existsSync(path);
 }
 
-module.exports = function(config) {
+module.exports = (config) => {
   const assets = baseAssets(config);
 
   const baseSrc = assets.base.src;

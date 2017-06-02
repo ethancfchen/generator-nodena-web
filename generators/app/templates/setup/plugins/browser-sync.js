@@ -17,7 +17,7 @@
  * @param  {object} assets Project assets.
  * @return {object}        Plugins options.
  */
-module.exports = function(config, assets) {
+module.exports = (config, assets) => {
   const argv = config.argv || {};
   const pref = assets.getPreference();
 

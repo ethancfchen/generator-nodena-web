@@ -18,7 +18,7 @@ const _ = require('lodash');
  * @param  {object} assets Project assets.
  * @return {object}        Plugins options.
  */
-module.exports = function(config, assets) {
+module.exports = (config, assets) => {
   const env = config.env;
   const pref = assets.getPreference();
 

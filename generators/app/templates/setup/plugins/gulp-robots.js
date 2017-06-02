@@ -15,7 +15,7 @@
  * @param  {object} assets Project assets.
  * @return {object}        Plugins options.
  */
-module.exports = function(config, assets) {
+module.exports = (config, assets) => {
   const pref = assets.getPreference();
 
   const domain = assets.domain;

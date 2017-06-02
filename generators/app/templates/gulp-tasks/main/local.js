@@ -1,6 +1,6 @@
 const runSequence = require('run-sequence');
 
-module.exports = function(cb) {
+module.exports = (cb) => {
   runSequence(
     'build',
     'browserSync',
