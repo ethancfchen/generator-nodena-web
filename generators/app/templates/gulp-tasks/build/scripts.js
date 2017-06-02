@@ -5,7 +5,7 @@ const _ = require('lodash');
 const webpackStream = require('webpack-stream');
 const webpack = require('webpack');
 
-const projectSetup = require('setup/setup');
+const Setup = require('setup/setup');
 
 function getGlobals(pref, env) {
   const key = 'js';
@@ -18,7 +18,7 @@ module.exports = function() {
   const env = this.opts.env;
   const browserSync = this.opts.browserSync;
 
-  const setup = projectSetup(env);
+  const setup = new Setup(env);
   const assets = setup.assets;
   const pref = setup.getPreference();
 

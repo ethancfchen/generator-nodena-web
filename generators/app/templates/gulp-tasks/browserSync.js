@@ -2,13 +2,13 @@ const _ = require('lodash');
 
 const httpProxy = require('http-proxy-middleware');
 
-const projectSetup = require('setup/setup');
+const Setup = require('setup/setup');
 
 module.exports = function() {
   const env = this.opts.env;
   const browserSync = this.opts.browserSync;
 
-  const setup = projectSetup(env);
+  const setup = new Setup(env);
   const assets = setup.assets;
 
   const optionsBrowserSync = setup.plugins.browserSync;

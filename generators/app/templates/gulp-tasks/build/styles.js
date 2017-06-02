@@ -11,7 +11,7 @@ const mergeLonghand = require('postcss-merge-longhand');
 const mergeRules = require('postcss-merge-rules');
 const clipPathPolyfill = require('postcss-clip-path-polyfill');
 
-const projectSetup = require('setup/setup');
+const Setup = require('setup/setup');
 
 function getGlobals(pref, env) {
   const key = 'sass';
@@ -24,7 +24,7 @@ module.exports = function() {
   const env = this.opts.env;
   const browserSync = this.opts.browserSync;
 
-  const setup = projectSetup(env);
+  const setup = new Setup(env);
   const assets = setup.assets;
   const pref = setup.getPreference();
 
