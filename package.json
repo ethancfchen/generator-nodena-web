@@ -13,7 +13,14 @@
   ],
   "main": "generators/index.js",
   "keywords": [
-    "",
+    "scaffold",
+    "front-end",
+    "web",
+    "gulp",
+    "pug",
+    "sass",
+    "webpack",
+    "nodena",
     "yeoman-generator"
   ],
   "devDependencies": {
