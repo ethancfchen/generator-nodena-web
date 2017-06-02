@@ -9,7 +9,6 @@
 *   [Git][Git]
 *   [Node.js][Node.js]
     *   [Gulp][Gulp]
-    *   [Bower][Bower]
 *   Optional Node Packages
     *   [pug-lint][pug-lint]
     *   [sass-lint][sass-lint]
@@ -34,7 +33,6 @@
 | `src/js/`                   | Script sources                                              |
 | `src/img/`                  | Images sources                                              |
 | `src/extras/`               | `favicon` and `sitemap.xml` etc.                            |
-| `src/vendor/`               | Third-party packages from [Bower][Bower]                    |
 | `res/`                      | Resources, including docs, sql, etc.                        |
 | `res/changelog.template.md` | Markdown template for changelog                             |
 | `dist/`                     | Temporary build files for developement/debug                |
@@ -44,7 +42,6 @@
 | `online/live/`              | Files for live site                                         |
 | `online/patches/`           | Patch files for each version                                |
 | `node_modules/`             | Dependent packages for Node.js                              |
-| `bower_components/`         | Dependent packages for [Bower][Bower]                       |
 | `.editorconfig`             | Editor config file for editors                              |
 | `.eslintrc`                 | Setup file for [ESlint][ESlint]                             |
 | `.gitignore`                | Ignored files list for [Git][Git]                           |
@@ -53,7 +50,6 @@
 | `gulpfile.js`               | Project main workflow                                       |
 | `gulptasks.js`              | Custom task loader for [gulp-task-loader][gulp-task-loader] |
 | `package.json`              | Project meta information                                    |
-| `bower.json`                | [Bower][Bower] dependency information                       |
 | `setup.json`                | Project setup variables                                     |
 | `README.md`                 | This readme file                                            |
 | `CHANGELOG.md`              | Auto generated change log                                   |
@@ -231,9 +227,9 @@ Example:
 {
   "sass": {
     "includePaths": [
-      "bower_components/breakpoint-sass/stylesheets",
-      "bower_components/normalize-scss/fork-versions/default",
-      "bower_components/upport-for/sass"
+      "node_modules/breakpoint-sass/stylesheets",
+      "node_modules/normalize-scss/fork-versions/default",
+      "node_modules/upport-for/sass"
     ]
   }
 }
@@ -351,7 +347,7 @@ Example:
 ```json
 {
   "copy": [{
-    "src": "bower_components/webcamjs/webcam.swf",
+    "src": "node_modules/webcamjs/webcam.swf",
     "dest": "js"
   }, {
     "src": [
@@ -555,7 +551,6 @@ gulp -p 8081
 [Changelog](CHANGELOG.md)
 
 [Babel]: https://babeljs.io/
-[Bower]: https://bower.io/
 [BrowserSync]: https://www.browsersync.io/
 [ESLint]: http://eslint.org/
 [Git]: https://git-scm.com/

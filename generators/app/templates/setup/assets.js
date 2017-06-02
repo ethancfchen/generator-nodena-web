@@ -7,9 +7,6 @@ const CONFIG = {
   babel: '.babelrc',
   webpack: 'webpack.config.js',
 };
-const BASE = {
-  bower: 'bower_components/',
-};
 const SRC = {
   docs: ['docs/**/*.pug', '!docs/**/_*'],
   styles: ['sass/**/*.scss', '!sass/'],
@@ -37,7 +34,6 @@ module.exports = function(config) {
 
   return _.merge(assets, {
     config: CONFIG,
-    base: BASE,
     src: SRC,
     vendor: VENDOR,
     dest: DEST,

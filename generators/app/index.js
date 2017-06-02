@@ -6,7 +6,6 @@ const mkdirp = require('mkdirp');
 const ASSETS = {
   package: 'package.json',
   mkdirp: [
-    'bower_components',
     'src/docs',
     'src/sass',
     'src/js',
@@ -29,7 +28,6 @@ const ASSETS = {
     '.editorconfig',
     '.pug-lintrc',
     '.sass-lint.yml',
-    'bower.json',
     'README.md',
     'setup.json',
     'gulptasks.js',
@@ -96,9 +94,5 @@ module.exports = class extends Generator {
     copyAllFiles(this);
     copyAllTmpFiles(this);
     copyAllTplFiles(this, template);
-  }
-
-  install() {
-    this.bowerInstall();
   }
 };

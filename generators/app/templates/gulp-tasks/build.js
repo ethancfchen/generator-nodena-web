@@ -3,7 +3,6 @@ const runSequence = require('run-sequence');
 module.exports = function(cb) {
   runSequence(
     'build:clean',
-    'build:bower',
     [
       'build:copy',
       'build:docs',

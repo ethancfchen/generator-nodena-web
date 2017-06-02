@@ -3,8 +3,6 @@ const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 
 const appAssets = [
-  'bower_components',
-  'gulp-tasks/build/bower.js',
   'gulp-tasks/build/clean.js',
   'gulp-tasks/build/copy.js',
   'gulp-tasks/build/docs.js',
@@ -39,7 +37,6 @@ const appAssets = [
   '.gitignore',
   '.pug-lintrc',
   '.sass-lint.yml',
-  'bower.json',
   'README.md',
   'setup.json',
   'gulptasks.js',
