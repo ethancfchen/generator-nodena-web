@@ -1,5 +1,5 @@
 {
-  "root": "./",
+  "root": "",
   "server": {
     "port": 8080,
     "index": "index.html",
