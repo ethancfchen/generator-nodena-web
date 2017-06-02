@@ -445,22 +445,31 @@ module.exports = function (setup) {
 
     // Other settings
 
-    plugins: setup.isOnline ? [
-      new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.OccurrenceOrderPlugin(),
-      new webpack.optimize.UglifyJsPlugin({
+    plugins: [
+      new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery'
+      })
+    ].concat(setup.isOnline ? [
+      new webpack.LoaderOptionsPlugin({
+        minimize: true
+      }),
+      new UglifyJSPlugin({
+        sourceMap: setup.isVerbose,
         compress: {
           warnings: false
         }
       })
-    ] : []
+    ] : []);
   };
 };
 ```
 
-## Build/Publish
+## Gulp Tasks
 
-### Build For Developement
+### Build/Publish
+
+#### Build For Developement
 
 Build the website and open live preview with [BrowserSync][BrowserSync].
 
@@ -468,7 +477,7 @@ Build the website and open live preview with [BrowserSync][BrowserSync].
 gulp
 ```
 
-### Build For Test/Debug in Published Environment (Bypass)
+#### Build For Test/Debug in Published Environment (Bypass)
 
 Build the website and open live preview with [BrowserSync][BrowserSync].
 
@@ -476,7 +485,7 @@ Build the website and open live preview with [BrowserSync][BrowserSync].
 gulp bypass
 ```
 
-### Publish For Stage Site
+#### Publish For Stage Site
 
 Build the website for stage, all files will generated in ```online/stage/```
 and create a version patch to ```online/patches/<version>```.
@@ -485,7 +494,7 @@ and create a version patch to ```online/patches/<version>```.
 gulp stage
 ```
 
-### Publish For Live Site
+#### Publish For Live Site
 
 Build the website for stage, all files will generated in ```online/live/```
 and create a version patch to ```online/patches/<version>```.
@@ -494,9 +503,9 @@ and create a version patch to ```online/patches/<version>```.
 gulp live
 ```
 
-### Options
+#### Build Options
 
-#### Verbose (default: false)
+##### Verbose (default: false)
 
 Disable all compression and show detailed debug information on console.
 
@@ -504,46 +513,64 @@ Disable all compression and show detailed debug information on console.
 gulp -b
 ```
 
-#### Version (default: prerelease/patch)
+##### Version (default: prerelease/patch)
 
 Increace version number using [semver][semver].
 
-##### Prerelease (Only for stage) => 1.0.x-stage.x
+###### Prerelease (Only for stage) => 1.0.x-stage.x
 
 ```bash
 gulp stage
 ```
 
-##### Patch (Only for live)
+###### Patch (Only for live)
 
 ```bash
 gulp live
 ```
 
-##### Minor (Only for live) => 1.x.0
+###### Minor (Only for live) => 1.x.0
 
 ```bash
 gulp live -v minor
 ```
 
-##### Major (Only for live) => x.0.0
+###### Major (Only for live) => x.0.0
 
 ```bash
 gulp live -v major
 ```
 
-##### Manually (Only for live)
+###### Manually (Only for live)
 
 ```bash
 gulp live -v 1.0.1
 ```
 
-#### Port for BrowserSync (default: 8080)
+##### Port for BrowserSync (default: 8080)
 
 Manually assign the port of live preview.
 
 ```bash
 gulp -p 8081
+```
+
+### Miscellaneous
+
+#### Save Optimized Images
+
+Copy optimized images of [gulp-imagemin][gulp-imagemin] from destination folder to source folder.
+
+```bash
+gulp save
+```
+
+#### Generate JSDoc
+
+Generate [JSDoc][JSDoc] files to ```docs``` folder.
+
+```bash
+gulp jsdoc
 ```
 
 ## Change Log

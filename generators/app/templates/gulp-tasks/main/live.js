@@ -6,7 +6,6 @@ module.exports = function(cb) {
     'build',
     'build:sitemap',
     'build:robots',
-    'save',
     'release:changelog',
     'git:commit-change',
     'git:tag',
