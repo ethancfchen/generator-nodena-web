@@ -1,7 +1,6 @@
 const fs = require('fs');
-const _ = require('lodash');
 
-const baseAssets = require('./base/assets');
+const BaseAssets = require('./base/assets');
 
 const CONFIG = {
   babel: '.babelrc',
@@ -14,7 +13,6 @@ const SRC = {
   images: ['img/**/*'],
   extras: ['extras/**/*'],
 };
-const VENDOR = 'vendor/';
 const DEST = {
   docs: '**/*.html',
   styles: 'css/',
@@ -23,29 +21,28 @@ const DEST = {
   index: 'index.html',
 };
 
-function isFileExist(path) {
-  return fs.existsSync(path);
-}
+class Assets extends BaseAssets {
+  constructor(config) {
+    super(config);
 
-module.exports = (config) => {
-  const assets = baseAssets(config);
+    const baseSrc = this.base.src;
 
-  const baseSrc = assets.base.src;
-
-  return _.merge(assets, {
-    config: CONFIG,
-    src: SRC,
-    vendor: VENDOR,
-    dest: DEST,
-    watch: {
+    this.config = CONFIG;
+    this.src = SRC;
+    this.dest = DEST;
+    this.watch = {
       docs: baseSrc + 'docs/**/*',
       styles: baseSrc + 'sass/**/*',
       scripts: baseSrc + 'js/**/*',
       webpack: CONFIG.webpack,
       images: baseSrc + 'img/**/*',
       extras: baseSrc + 'extras/**/*',
-    },
+    };
+  }
 
-    isFileExist,
-  });
-};
+  isFileExist(path) {
+    return fs.existsSync(path);
+  }
+}
+
+module.exports = Assets;

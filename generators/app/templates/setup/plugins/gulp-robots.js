@@ -15,17 +15,19 @@
  * @param  {object} assets Project assets.
  * @return {object}        Plugins options.
  */
-module.exports = (config, assets) => {
-  const pref = assets.getPreference();
 
-  const domain = assets.domain;
-  const robots = pref.robots || {};
+class PluginGulpRobots {
+  constructor(config, assets) {
+    const pref = assets.getPreference();
 
-  const options = {
-    useragent: '*',
-    allow: robots.allow,
-    disallow: robots.disallow,
-    sitemap: domain + '/sitemap.xml',
-  };
-  return options;
-};
+    const domain = assets.domain;
+    const robots = pref.robots || {};
+
+    this.useragent = '*';
+    this.allow = robots.allow;
+    this.disallow = robots.disallow;
+    this.sitemap = domain + '/sitemap.xml';
+  }
+}
+
+module.exports = PluginGulpRobots;

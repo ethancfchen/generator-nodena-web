@@ -18,20 +18,24 @@ const _ = require('lodash');
  * @param  {object} assets Project assets.
  * @return {object}        Plugins options.
  */
-module.exports = (config, assets) => {
-  const env = config.env;
-  const pref = assets.getPreference();
 
-  const sassOptions = pref.sass || {};
 
-  const options = _.merge({
-    outputStyle: {
+class PluginGulpSass {
+  constructor(config, assets) {
+    const env = config.env;
+    const pref = assets.getPreference();
+
+    const sassOptions = pref.sass || {};
+
+    this.outputStyle = {
       local: 'expanded',
       bypass: 'compressed',
       stage: 'compressed',
       live: 'compressed',
-    }[env],
-  }, sassOptions);
+    }[env];
 
-  return options;
-};
+    _.merge(this, sassOptions);
+  }
+}
+
+module.exports = PluginGulpSass;

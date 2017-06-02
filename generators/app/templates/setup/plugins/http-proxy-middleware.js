@@ -19,19 +19,23 @@ const _ = require('lodash');
  * @param  {object} assets Project assets.
  * @return {object}        Plugins options.
  */
-module.exports = (config, assets) => {
-  const pref = assets.getPreference();
-  const proxy = pref.proxy || [];
 
-  const options = _(proxy).map((item) => {
-    return {
-      route: item.route,
-      options: {
-        target: item.target,
-        changeOrigin: true,
-        secure: !item.selfCert,
-      },
-    };
-  });
-  return options;
-};
+class PluginHttpProxyMiddleware {
+  constructor(config, assets) {
+    const pref = assets.getPreference();
+    const proxy = pref.proxy || [];
+
+    this.proxies = _(proxy).map((item) => {
+      return {
+        route: item.route,
+        options: {
+          target: item.target,
+          changeOrigin: true,
+          secure: !item.selfCert,
+        },
+      };
+    });
+  }
+}
+
+module.exports = PluginHttpProxyMiddleware;

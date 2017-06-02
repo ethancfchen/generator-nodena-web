@@ -19,21 +19,22 @@ const moment = require('moment');
  * @param  {object} assets Project assets.
  * @return {object}        Plugins options.
  */
-module.exports = (config, assets) => {
-  const env = config.env;
-  const argv = config.argv || {};
-  const pref = assets.getPreference();
 
-  const version = assets.getPackageJsonVersion();
-  const globals = pref.globals || {};
-  const overrides = (pref[env] || {}).globals;
+class PluginGulpPug {
+  constructor(config, assets) {
+    const env = config.env;
+    const argv = config.argv || {};
+    const pref = assets.getPreference();
 
-  const pugData = globals.pug || {};
-  const overridePugData = (overrides || {}).pug;
+    const version = assets.getPackageJsonVersion();
+    const globals = pref.globals || {};
+    const overrides = (pref[env] || {}).globals;
 
-  const options = {
-    pretty: argv.verbose,
-    locals: _.merge({
+    const pugData = globals.pug || {};
+    const overridePugData = (overrides || {}).pug;
+
+    this.pretty = argv.verbose;
+    this.locals = _.merge({
       /* Constants */
       ENV: env,
       VERSION: version,
@@ -42,8 +43,8 @@ module.exports = (config, assets) => {
       /* Utilities */
       _,
       moment,
-    }, pugData, overridePugData),
-  };
+    }, pugData, overridePugData);
+  }
+}
 
-  return options;
-};
+module.exports = PluginGulpPug;

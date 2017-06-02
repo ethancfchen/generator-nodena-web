@@ -17,29 +17,32 @@
  * @param  {object} assets Project assets.
  * @return {object}        Plugins options.
  */
-module.exports = (config, assets) => {
-  const argv = config.argv || {};
-  const pref = assets.getPreference();
 
-  const server = pref.server || {};
-  const port = argv.port || server.port;
-  const isHttps = server.https;
+class PluginBrowserSync {
+  constructor(config, assets) {
+    const argv = config.argv || {};
+    const pref = assets.getPreference();
 
-  const options = {
-    port,
-    server: {
+    const server = pref.server || {};
+    const port = argv.port || server.port;
+    const isHttps = server.https;
+
+    this.port = port;
+    this.server = {
       baseDir: assets.dist,
       index: server.index,
-    },
-    https: isHttps,
-    ui: {
+    };
+    this.https = isHttps;
+    this.ui = {
       port: port + 1,
-    },
-    startPath: pref.root,
-  };
-  if (!port) {
-    delete options.port;
-    delete options.ui.port;
+    };
+    this.startPath = pref.root;
+
+    if (!port) {
+      delete this.port;
+      delete this.ui.port;
+    }
   }
-  return options;
-};
+}
+
+module.exports = PluginBrowserSync;

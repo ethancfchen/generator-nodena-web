@@ -2,37 +2,34 @@
  * Plugin Setup: gulp-preprocess
  *
  * @module setup/plugins/gulp-preprocess
- */
-
-/**
- * Plugin Setup: gulp-preprocess
  *
  * @example {@lang javascript}
- * var gulpPreprocess = require('./plugins/gulp-preprocess')(config, assets);
- *
- * @see {@link https://github.com/jas/gulp-preprocess/|Github}
- * @param  {object} config Project configurations.
- * @param  {object} assets Project assets.
- * @return {object}        Plugins options.
+ * const PluginGulpPreprocess = require('./plugins/gulp-preprocess');
+ * const pluginGulpPreprocess = PluginGulpPreprocess(config, assets);
  */
-module.exports = (config, assets) => {
-  const env = config.env;
-  const version = assets.getPackageJsonVersion();
+class PluginGulpPreprocess {
+  /**
+   * @see {@link https://github.com/jas/gulp-preprocess/|Github}
+   * @param  {object} config Project configurations.
+   * @param  {object} assets Project assets.
+   */
+  constructor(config, assets) {
+    const env = config.env;
+    const version = assets.getPackageJsonVersion();
 
-  const pref = assets.getPreference();
+    const pref = assets.getPreference();
 
-  const filterOptions = (pref.preprocess || {}).filter || {};
+    const filterOptions = (pref.preprocess || {}).filter || {};
 
-  const options = {
-    context: {
+    this.context = {
       ENV: env,
       VERSION: version,
       DOMAIN: assets.domain,
-    },
+    };
 
     /* Custom */
-    filter: filterOptions,
-  };
+    this.filter = filterOptions;
+  }
+}
 
-  return options;
-};
+module.exports = PluginGulpPreprocess;

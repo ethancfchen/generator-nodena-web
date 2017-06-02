@@ -24,7 +24,7 @@ module.exports = function() {
     },
   });
 
-  _(optionsProxy).forEach((proxy) => {
+  _(optionsProxy.proxies).forEach((proxy) => {
     middleware.push(httpProxy(proxy.route, proxy.options));
   });
 
