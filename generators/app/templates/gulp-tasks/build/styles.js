@@ -31,38 +31,38 @@ module.exports = function() {
   const src = assets.src.styles;
   const dest = pref.root + assets.dest.styles;
 
-  const optionsSass = setup.plugins.gulpSass;
-  const optionsDoiuse = pref.doiuse;
-  let optionsPostcss = [
+  const sassOpts = setup.plugins.gulpSass;
+  const doiuseOpts = pref.doiuse;
+  let postcssOpts = [
     cssnext,
     grandientfixer,
     flexbugsFixes,
     mergeLonghand,
     mergeRules,
     clipPathPolyfill,
-    setup.isVerbose && optionsDoiuse ? doiuse(optionsDoiuse) : undefined,
+    setup.isVerbose && doiuseOpts ? doiuse(doiuseOpts) : undefined,
   ];
-  const optionsPreprocess = setup.plugins.gulpPreprocess;
+  const preprocessOpts = setup.plugins.gulpPreprocess;
 
   const sassData = getGlobals(pref, env);
-  const filterOptions = optionsPreprocess.filter.sass;
+  const filterOptions = preprocessOpts.filter.sass;
   const $filter = filterOptions ?
     $.filter(filterOptions, {restore: true}) :
     $.util.noop();
   const $filterRestore = filterOptions ? $filter.restore : $.util.noop();
 
-  optionsPostcss = _(optionsPostcss).reject(_.isUndefined).value();
-  optionsPreprocess.context = _.merge(optionsPreprocess.context, sassData);
+  postcssOpts = _(postcssOpts).reject(_.isUndefined).value();
+  preprocessOpts.context = _.merge(preprocessOpts.context, sassData);
 
   return gulp
     .src(src, {cwd: assets.base.src})
     .pipe($.if(setup.isLocal, $.plumber()))
     .pipe($.if(setup.isVerbose, $.sourcemaps.init()))
-    .pipe($.sass(optionsSass).on('error', $.sass.logError))
-    .pipe($.postcss(optionsPostcss))
+    .pipe($.sass(sassOpts).on('error', $.sass.logError))
+    .pipe($.postcss(postcssOpts))
     .pipe($.if(setup.isVerbose, $.sourcemaps.write('.')))
     .pipe($filter)
-    .pipe($.preprocess(optionsPreprocess))
+    .pipe($.preprocess(preprocessOpts))
     .pipe($filterRestore)
     .pipe(gulp.dest(dest, {cwd: assets.dist}))
     .pipe(browserSync.stream());

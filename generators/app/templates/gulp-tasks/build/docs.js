@@ -14,12 +14,12 @@ module.exports = function() {
   const src = assets.src.docs;
   const dest = pref.root;
 
-  const optionsPug = setup.plugins.gulpPug;
+  const options = setup.plugins.gulpPug;
 
   return gulp
     .src(src, {cwd: assets.base.src})
     .pipe($.if(setup.isLocal, $.plumber()))
-    .pipe($.pug(optionsPug))
+    .pipe($.pug(options))
     .pipe(gulp.dest(dest, {cwd: assets.dist}))
     .pipe(browserSync.stream());
 };

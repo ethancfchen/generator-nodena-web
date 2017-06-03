@@ -11,8 +11,8 @@ module.exports = function() {
   const setup = new Setup(env);
   const assets = setup.assets;
 
-  const optionsBrowserSync = setup.plugins.browserSync;
-  const optionsProxy = setup.plugins.httpProxyMiddleware;
+  const browserSyncOpts = setup.plugins.browserSync;
+  const proxyOpts = setup.plugins.httpProxyMiddleware;
 
   const plugins = [];
   const middleware = [];
@@ -24,11 +24,11 @@ module.exports = function() {
     },
   });
 
-  _(optionsProxy.proxies).forEach((proxy) => {
+  _(proxyOpts.proxies).forEach((proxy) => {
     middleware.push(httpProxy(proxy.route, proxy.options));
   });
 
-  optionsBrowserSync.plugins = plugins;
-  optionsBrowserSync.server.middleware = middleware;
-  browserSync.init(optionsBrowserSync);
+  browserSyncOpts.plugins = plugins;
+  browserSyncOpts.server.middleware = middleware;
+  browserSync.init(browserSyncOpts);
 };

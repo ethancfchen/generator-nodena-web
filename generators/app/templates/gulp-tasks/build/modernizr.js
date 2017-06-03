@@ -14,10 +14,10 @@ module.exports = function() {
   const src = assets.src.scripts;
   const dest = pref.root + assets.dest.scripts;
 
-  const optionsModernizr = pref.modernizr;
-  const optionsUglify = setup.plugins.gulpUglify;
+  const options = pref.modernizr;
+  const uglifyOpts = setup.plugins.gulpUglify;
 
-  const isDisabled = optionsModernizr === false;
+  const isDisabled = options === false;
 
   if (isDisabled) {
     return gulp
@@ -30,8 +30,8 @@ module.exports = function() {
     .pipe($.if(setup.isLocal, $.plumber()))
     .pipe($.if(setup.isVerbose, $.sourcemaps.init()))
     .pipe($.include())
-    .pipe($.modernizr(optionsModernizr))
-    .pipe($.if(setup.isOnline, $.uglify(optionsUglify)))
+    .pipe($.modernizr(options))
+    .pipe($.if(setup.isOnline, $.uglify(uglifyOpts)))
     .pipe($.if(setup.isVerbose, $.sourcemaps.write()))
     .pipe(gulp.dest(dest, {cwd: assets.dist}))
     .pipe(browserSync.stream());

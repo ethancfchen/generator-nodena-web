@@ -16,15 +16,15 @@ module.exports = function() {
   const src = assets.src.images;
   const dest = pref.root + assets.dest.images;
 
-  const optionsImagemin = pref.imagemin;
+  const options = pref.imagemin;
 
-  const plugins = _(optionsImagemin.plugins).map((options, key) => {
+  const plugins = _(options.plugins).map((options, key) => {
     return require('imagemin-' + _.kebabCase(key))(options);
   }).reject(_.isUndefined).value();
 
   return gulp.src(src, {cwd: assets.base.src})
     .pipe($.if(setup.isLocal, $.plumber()))
-    .pipe($.if(setup.isOnline, $.imagemin(plugins, optionsImagemin.main)))
+    .pipe($.if(setup.isOnline, $.imagemin(plugins, options.main)))
     .pipe(gulp.dest(dest, {cwd: assets.dist}))
     .pipe(browserSync.stream());
 };
