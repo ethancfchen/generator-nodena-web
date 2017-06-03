@@ -1,4 +1,6 @@
 coverage
+bower_components
+node_modules
 gulp-tasks
 setup
 .eslintrc.js
