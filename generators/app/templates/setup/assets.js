@@ -22,8 +22,8 @@ const DEST = {
 };
 
 class Assets extends BaseAssets {
-  constructor(config) {
-    super(config);
+  constructor(options) {
+    super(options);
 
     const baseSrc = this.base.src;
 

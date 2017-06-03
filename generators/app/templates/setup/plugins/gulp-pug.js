@@ -1,29 +1,22 @@
-/**
- * Plugin Setup: gulp-pug
- *
- * @module setup/plugins/gulp-pug
- */
-
 const _ = require('lodash');
 const moment = require('moment');
 
 /**
  * Plugin Setup: gulp-pug
  *
+ * @module setup/plugins/gulp-pug
+ *
  * @example {@lang javascript}
- * var gulpPug = require('./plugins/gulp-pug')(config, assets);
+ * const PluginGulpPug = require('./plugins/gulp-pug');
+ * const pluginGulpPug = new PluginGulpPug(options, assets);
  *
  * @see {@link https://github.com/jamen/gulp-pug/|Github}
- * @see {@link http://jade-lang.com/api/|Avaliable Options}
- * @param  {object} config Project configurations.
- * @param  {object} assets Project assets.
- * @return {object}        Plugins options.
+ * @see {@link https://pugjs.org/api/reference.html#options|Avaliable Options}
  */
-
 class PluginGulpPug {
-  constructor(config, assets) {
-    const env = config.env;
-    const argv = config.argv || {};
+  constructor(options, assets) {
+    const env = options.env;
+    const argv = options.argv || {};
     const pref = assets.getPreference();
 
     const version = assets.getPackageJsonVersion();

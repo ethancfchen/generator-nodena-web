@@ -1,27 +1,21 @@
-/**
- * Plugin Setup: http-proxy-middleware
- *
- * @module setup/plugins/http-proxy-middleware
- */
-
 const _ = require('lodash');
 
 /**
  * Plugin Setup: http-proxy-middleware
  *
+ * @module setup/plugins/http-proxy-middleware
+ *
  * @example {@lang javascript}
- * var httpProxyMiddleware =
- *      require('./plugins/http-proxy-middleware')(config, assets);
+ * const PluginHttpProxyMiddleware =
+ *      require('./plugins/http-proxy-middleware');
+ * const pluginHttpProxyMiddleware =
+ *      new PluginHttpProxyMiddleware(options, assets);
  *
  * @see {@link https://github.com/chimurai/http-proxy-middleware/|Github}
  * @see {@link https://github.com/chimurai/http-proxy-middleware#options|Avaliable Options}
- * @param  {object} config Project configurations.
- * @param  {object} assets Project assets.
- * @return {object}        Plugins options.
  */
-
 class PluginHttpProxyMiddleware {
-  constructor(config, assets) {
+  constructor(options, assets) {
     const pref = assets.getPreference();
     const proxy = pref.proxy || [];
 

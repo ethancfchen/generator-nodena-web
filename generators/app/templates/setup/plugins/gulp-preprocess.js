@@ -5,16 +5,13 @@
  *
  * @example {@lang javascript}
  * const PluginGulpPreprocess = require('./plugins/gulp-preprocess');
- * const pluginGulpPreprocess = PluginGulpPreprocess(config, assets);
+ * const pluginGulpPreprocess = PluginGulpPreprocess(options, assets);
+ *
+ * @see {@link https://github.com/jas/gulp-preprocess/|Github}
  */
 class PluginGulpPreprocess {
-  /**
-   * @see {@link https://github.com/jas/gulp-preprocess/|Github}
-   * @param  {object} config Project configurations.
-   * @param  {object} assets Project assets.
-   */
-  constructor(config, assets) {
-    const env = config.env;
+  constructor(options, assets) {
+    const env = options.env;
     const version = assets.getPackageJsonVersion();
 
     const pref = assets.getPreference();

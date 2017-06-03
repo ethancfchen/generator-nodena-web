@@ -2,22 +2,15 @@
  * Plugin Setup: gulp-robots
  *
  * @module setup/plugins/gulp-robots
- */
-
-/**
- * Plugin Setup: gulp-robots
  *
  * @example {@lang javascript}
- * var gulpRobots = require('./plugins/gulp-robots')(config, assets);
+ * const PluginGulpRobots = require('./plugins/gulp-robots');
+ * const pluginGulpRobots = new PluginGulpRobots(options, assets);
  *
  * @see {@link https://github.com/haydenbleasel/robots-generator/|Github}
- * @param  {object} config Project configurations.
- * @param  {object} assets Project assets.
- * @return {object}        Plugins options.
  */
-
 class PluginGulpRobots {
-  constructor(config, assets) {
+  constructor(options, assets) {
     const pref = assets.getPreference();
 
     const domain = assets.domain;
