@@ -2,6 +2,7 @@
  * Plugin Setup: Browsersync
  *
  * @module setup/plugins/browser-sync
+ *
  * @example {@lang javascript}
  * const PluginBrowserSync = require('./plugins/browser-sync');
  * const pluginBrowserSync = new PluginBrowserSync(options, assets);
