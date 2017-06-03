@@ -1,6 +1,6 @@
 const runSequence = require('run-sequence');
 
-module.exports = (cb) => {
+module.exports = function(cb) {
   runSequence(
     'release:version',
     'build',
