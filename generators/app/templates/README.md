@@ -101,7 +101,7 @@ Assign proxy to [BrowserSync][BrowserSync].
 Options:
 
 *   `uri` - The URI path matching for proxy.
-*   `options` - The proxy options. See [options of http-proxy-middleware][http-proxy-middleware#options].
+*   `options` - The proxy options. See [options of proxy][node-http-proxy#options].
 
 Example:
 
@@ -599,7 +599,7 @@ gulp jsdoc
 [gulp-pug]: https://github.com/pugjs/gulp-pug/
 [gulp-sass]: https://github.com/dlmanning/gulp-sass/
 [gulp-task-loader]: https://github.com/hontas/gulp-task-loader/
-[http-proxy-middleware#options]: https://github.com/nodejitsu/node-http-proxy#options
+[node-http-proxy#options]: https://github.com/nodejitsu/node-http-proxy#options
 [npm-url]: https://npmjs.org/package/generator-nodena-web/
 [pug-lint]: https://github.com/pugjs/pug-lint/
 [robots-generator]: https://github.com/haydenbleasel/robots-generator/
