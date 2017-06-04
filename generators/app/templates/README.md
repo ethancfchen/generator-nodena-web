@@ -108,12 +108,18 @@ Example:
 ```json
 {
   "proxy": [{
-    "route": "/api",
-    "target": "https://mydomain.com",
-    "selfCert": true
+    "uri": "/api",
+    "options": {
+      "target": "https://mydomain.com",
+      "changeOrigin": true,
+      "secure": false
+    }
   }, {
-    "route": "/upload",
-    "target": "http://mydomain.com"
+    "uri": "/upload",
+    "options": {
+      "target": "http://mydomain.com",
+      "changeOrigin": true
+    }
   }]
 }
 ```
