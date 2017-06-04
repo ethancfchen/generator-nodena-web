@@ -25,7 +25,7 @@ module.exports = function() {
   });
 
   _(proxyOpts.proxies).forEach((proxy) => {
-    middleware.push(httpProxy(proxy.route, proxy.options));
+    middleware.push(httpProxy(proxy.uri, proxy.options));
   });
 
   browserSyncOpts.plugins = plugins;

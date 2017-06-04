@@ -21,12 +21,8 @@ class PluginHttpProxyMiddleware {
 
     this.proxies = _(proxy).map((item) => {
       return {
-        route: item.route,
-        options: {
-          target: item.target,
-          changeOrigin: true,
-          secure: !item.selfCert,
-        },
+        uri: item.uri,
+        options: item.options,
       };
     });
   }
