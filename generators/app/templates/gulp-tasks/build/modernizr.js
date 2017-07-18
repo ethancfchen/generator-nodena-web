@@ -1,6 +1,5 @@
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
-const pump = require('pump');
 
 const Setup = require('setup/setup');
 
@@ -21,19 +20,16 @@ module.exports = function() {
   const isDisabled = options === false;
 
   if (isDisabled) {
-    return pump([
-      gulp.src(src, {cwd: assets.base.src}),
-      $.util.noop(),
-    ]);
+    return gulp.src(src, {cwd: assets.base.src})
+      .pipe($.util.noop());
   }
-  return pump([
-    gulp.src(src, {cwd: assets.base.src}),
-    $.if(setup.isLocal, $.plumber()),
-    $.if(setup.isVerbose, $.sourcemaps.init()),
-    $.modernizr(options),
-    $.if(setup.isOnline, $.uglify(uglifyOpts)),
-    $.if(setup.isVerbose, $.sourcemaps.write()),
-    gulp.dest(dest, {cwd: assets.dist}),
-    browserSync.stream(),
-  ]);
+  return gulp.src(src, {cwd: assets.base.src})
+    .pipe($.if(setup.isLocal, $.plumber()))
+    .pipe($.if(setup.isVerbose, $.sourcemaps.init()))
+    .pipe($.modernizr(options))
+    .pipe($.if(setup.isOnline, $.uglify(uglifyOpts)))
+    .on('error', (err) => console.error(err))
+    .pipe($.if(setup.isVerbose, $.sourcemaps.write()))
+    .pipe(gulp.dest(dest, {cwd: assets.dist}))
+    .pipe(browserSync.stream());
 };

@@ -1,6 +1,5 @@
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
-const pump = require('pump');
 
 const _ = require('lodash');
 const webpackStream = require('webpack-stream');
@@ -49,26 +48,24 @@ module.exports = function() {
       webpackOpts = webpackOpts(setup);
     }
 
-    return pump([
-      gulp.src(src, {cwd: assets.base.src}),
-      $.if(setup.isLocal, $.plumber()),
-      webpackStream(webpackOpts, webpack),
-      gulp.dest(dest, {cwd: assets.dist}),
-      browserSync.stream(),
-    ]);
+    return gulp.src(src, {cwd: assets.base.src})
+      .pipe($.if(setup.isLocal, $.plumber()))
+      .pipe(webpackStream(webpackOpts, webpack))
+      .pipe(gulp.dest(dest, {cwd: assets.dist}))
+      .pipe(browserSync.stream());
   }
-  return pump([
-    gulp.src(src, {cwd: assets.base.src}),
-    $.if(setup.isLocal, $.plumber()),
-    $filter,
-    $.preprocess(preprocessOpts),
-    $filterRestore,
-    $.if(setup.isVerbose, $.sourcemaps.init()),
-    $.if(isBabel, $.babel()),
-    $.include(),
-    $.if(setup.isOnline, $.uglify(uglifyOpts)),
-    $.if(setup.isVerbose, $.sourcemaps.write()),
-    gulp.dest(dest, {cwd: assets.dist}),
-    browserSync.stream(),
-  ]);
+
+  return gulp.src(src, {cwd: assets.base.src})
+    .pipe($.if(setup.isLocal, $.plumber()))
+    .pipe($filter)
+    .pipe($.preprocess(preprocessOpts))
+    .pipe($filterRestore)
+    .pipe($.if(setup.isVerbose, $.sourcemaps.init()))
+    .pipe($.if(isBabel, $.babel()))
+    .pipe($.include())
+    .pipe($.if(setup.isOnline, $.uglify(uglifyOpts)))
+    .on('error', (err) => console.error(err))
+    .pipe($.if(setup.isVerbose, $.sourcemaps.write()))
+    .pipe(gulp.dest(dest, {cwd: assets.dist}))
+    .pipe(browserSync.stream());
 };

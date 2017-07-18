@@ -1,6 +1,5 @@
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
-const pump = require('pump');
 
 const _ = require('lodash');
 
@@ -23,11 +22,9 @@ module.exports = function() {
     return require('imagemin-' + _.kebabCase(key))(options);
   }).reject(_.isUndefined).value();
 
-  return pump([
-    gulp.src(src, {cwd: assets.base.src}),
-    $.if(setup.isLocal, $.plumber()),
-    $.if(setup.isOnline, $.imagemin(plugins, options.main)),
-    gulp.dest(dest, {cwd: assets.dist}),
-    browserSync.stream(),
-  ]);
+  return gulp.src(src, {cwd: assets.base.src})
+    .pipe($.if(setup.isLocal, $.plumber()))
+    .pipe($.if(setup.isOnline, $.imagemin(plugins, options.main)))
+    .pipe(gulp.dest(dest, {cwd: assets.dist}))
+    .pipe(browserSync.stream());
 };

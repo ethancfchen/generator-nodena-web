@@ -1,6 +1,6 @@
 const runSequence = require('run-sequence');
 
-module.exports = function(cb) {
+module.exports = function(taskCallback) {
   runSequence(
     'build:clean',
     [
@@ -12,6 +12,6 @@ module.exports = function(cb) {
       'build:images',
       'build:extras',
     ],
-    cb
+    taskCallback
   );
 };

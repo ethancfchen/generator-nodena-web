@@ -1,6 +1,6 @@
 const runSequence = require('run-sequence');
 
-module.exports = function(cb) {
+module.exports = function(taskCallback) {
   runSequence(
     'release:version',
     'build',
@@ -8,6 +8,6 @@ module.exports = function(cb) {
     'git:commit-change',
     'git:tag',
     'release:patch',
-    cb
+    taskCallback
   );
 };
