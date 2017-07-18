@@ -15,7 +15,7 @@ function getGlobals(pref, env) {
   return _.merge(globals, overrides);
 }
 
-module.exports = function(taskCallback) {
+module.exports = function() {
   const env = this.opts.env;
   const browserSync = this.opts.browserSync;
 
@@ -49,27 +49,26 @@ module.exports = function(taskCallback) {
       webpackOpts = webpackOpts(setup);
     }
 
-    pump([
+    return pump([
       gulp.src(src, {cwd: assets.base.src}),
       $.if(setup.isLocal, $.plumber()),
       webpackStream(webpackOpts, webpack),
       gulp.dest(dest, {cwd: assets.dist}),
       browserSync.stream(),
-    ], taskCallback);
-  } else {
-    pump([
-      gulp.src(src, {cwd: assets.base.src}),
-      $.if(setup.isLocal, $.plumber()),
-      $.if(setup.isVerbose, $.sourcemaps.init()),
-      $.if(isBabel, $.babel()),
-      $filter,
-      $.preprocess(preprocessOpts),
-      $filterRestore,
-      $.include(),
-      $.if(setup.isOnline, $.uglify(uglifyOpts)),
-      $.if(setup.isVerbose, $.sourcemaps.write()),
-      gulp.dest(dest, {cwd: assets.dist}),
-      browserSync.stream(),
-    ], taskCallback);
+    ]);
   }
+  return pump([
+    gulp.src(src, {cwd: assets.base.src}),
+    $.if(setup.isLocal, $.plumber()),
+    $filter,
+    $.preprocess(preprocessOpts),
+    $filterRestore,
+    $.if(setup.isVerbose, $.sourcemaps.init()),
+    $.if(isBabel, $.babel()),
+    $.include(),
+    $.if(setup.isOnline, $.uglify(uglifyOpts)),
+    $.if(setup.isVerbose, $.sourcemaps.write()),
+    gulp.dest(dest, {cwd: assets.dist}),
+    browserSync.stream(),
+  ]);
 };

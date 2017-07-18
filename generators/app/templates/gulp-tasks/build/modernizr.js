@@ -4,7 +4,7 @@ const pump = require('pump');
 
 const Setup = require('setup/setup');
 
-module.exports = function(taskCallback) {
+module.exports = function() {
   const env = this.opts.env;
   const browserSync = this.opts.browserSync;
 
@@ -21,20 +21,19 @@ module.exports = function(taskCallback) {
   const isDisabled = options === false;
 
   if (isDisabled) {
-    pump([
+    return pump([
       gulp.src(src, {cwd: assets.base.src}),
       $.util.noop(),
-    ], taskCallback);
-  } else {
-    pump([
-      gulp.src(src, {cwd: assets.base.src}),
-      $.if(setup.isLocal, $.plumber()),
-      $.if(setup.isVerbose, $.sourcemaps.init()),
-      $.modernizr(options),
-      $.if(setup.isOnline, $.uglify(uglifyOpts)),
-      $.if(setup.isVerbose, $.sourcemaps.write()),
-      gulp.dest(dest, {cwd: assets.dist}),
-      browserSync.stream(),
-    ], taskCallback);
+    ]);
   }
+  return pump([
+    gulp.src(src, {cwd: assets.base.src}),
+    $.if(setup.isLocal, $.plumber()),
+    $.if(setup.isVerbose, $.sourcemaps.init()),
+    $.modernizr(options),
+    $.if(setup.isOnline, $.uglify(uglifyOpts)),
+    $.if(setup.isVerbose, $.sourcemaps.write()),
+    gulp.dest(dest, {cwd: assets.dist}),
+    browserSync.stream(),
+  ]);
 };

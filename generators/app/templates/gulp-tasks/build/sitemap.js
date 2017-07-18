@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
+const pump = require('pump');
 
 const Setup = require('setup/setup');
 
@@ -17,8 +18,9 @@ module.exports = function() {
     siteUrl: setup.domain,
   };
 
-  return gulp
-    .src(src, {cwd: assets.dist})
-    .pipe($.sitemap(options))
-    .pipe(gulp.dest(dest, {cwd: assets.dist}));
+  return pump([
+    gulp.src(src, {cwd: assets.dist}),
+    $.sitemap(options),
+    gulp.dest(dest, {cwd: assets.dist}),
+  ]);
 };

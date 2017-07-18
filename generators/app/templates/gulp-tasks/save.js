@@ -1,4 +1,5 @@
 const gulp = require('gulp');
+const pump = require('pump');
 
 const Setup = require('setup/setup');
 
@@ -12,7 +13,8 @@ module.exports = function() {
   const src = pref.root + assets.src.images;
   const dest = assets.dest.images;
 
-  return gulp
-    .src(src, {cwd: assets.dist})
-    .pipe(gulp.dest(dest, {cwd: assets.base.src}));
+  pump([
+    gulp.src(src, {cwd: assets.dist}),
+    gulp.dest(dest, {cwd: assets.base.src}),
+  ]);
 };

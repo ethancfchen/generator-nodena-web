@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
+const pump = require('pump');
 
 const Setup = require('setup/setup');
 
@@ -16,10 +17,11 @@ module.exports = function() {
 
   const options = setup.plugins.gulpPug;
 
-  return gulp
-    .src(src, {cwd: assets.base.src})
-    .pipe($.if(setup.isLocal, $.plumber()))
-    .pipe($.pug(options))
-    .pipe(gulp.dest(dest, {cwd: assets.dist}))
-    .pipe(browserSync.stream());
+  return pump([
+    gulp.src(src, {cwd: assets.base.src}),
+    $.if(setup.isLocal, $.plumber()),
+    $.pug(options),
+    gulp.dest(dest, {cwd: assets.dist}),
+    browserSync.stream(),
+  ]);
 };

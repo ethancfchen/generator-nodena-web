@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
+const pump = require('pump');
 
 const _ = require('lodash');
 
@@ -35,11 +36,12 @@ module.exports = function() {
 
   preprocessOpts.context = _.merge(preprocessOpts.context, extrasData);
 
-  return gulp
-    .src(src, {cwd: assets.base.src})
-    .pipe($.if(isPreprocess, $filter))
-    .pipe($.if(isPreprocess, $.preprocess(preprocessOpts)))
-    .pipe($.if(isPreprocess, $filterRestore))
-    .pipe(gulp.dest(dest, {cwd: assets.dist}))
-    .pipe(browserSync.stream());
+  return pump([
+    gulp.src(src, {cwd: assets.base.src}),
+    $.if(isPreprocess, $filter),
+    $.if(isPreprocess, $.preprocess(preprocessOpts)),
+    $.if(isPreprocess, $filterRestore),
+    gulp.dest(dest, {cwd: assets.dist}),
+    browserSync.stream(),
+  ]);
 };

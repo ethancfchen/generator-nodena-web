@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
+const pump = require('pump');
 
 const _ = require('lodash');
 
@@ -54,16 +55,17 @@ module.exports = function() {
   postcssOpts = _(postcssOpts).reject(_.isUndefined).value();
   preprocessOpts.context = _.merge(preprocessOpts.context, sassData);
 
-  return gulp
-    .src(src, {cwd: assets.base.src})
-    .pipe($.if(setup.isLocal, $.plumber()))
-    .pipe($.if(setup.isVerbose, $.sourcemaps.init()))
-    .pipe($.sass(sassOpts).on('error', $.sass.logError))
-    .pipe($.postcss(postcssOpts))
-    .pipe($.if(setup.isVerbose, $.sourcemaps.write('.')))
-    .pipe($filter)
-    .pipe($.preprocess(preprocessOpts))
-    .pipe($filterRestore)
-    .pipe(gulp.dest(dest, {cwd: assets.dist}))
-    .pipe(browserSync.stream());
+  return pump([
+    gulp.src(src, {cwd: assets.base.src}),
+    $.if(setup.isLocal, $.plumber()),
+    $.if(setup.isVerbose, $.sourcemaps.init()),
+    $.sass(sassOpts).on('error', $.sass.logError),
+    $.postcss(postcssOpts),
+    $.if(setup.isVerbose, $.sourcemaps.write('.')),
+    $filter,
+    $.preprocess(preprocessOpts),
+    $filterRestore,
+    gulp.dest(dest, {cwd: assets.dist}),
+    browserSync.stream(),
+  ]);
 };

@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
+const pump = require('pump');
 
 const Setup = require('setup/setup');
 
@@ -15,8 +16,9 @@ module.exports = function() {
 
   const options = setup.plugins.gulpRobots;
 
-  return gulp
-    .src(src)
-    .pipe($.robots(options))
-    .pipe(gulp.dest(dest, {cwd: assets.dist}));
+  return pump([
+    gulp.src(src),
+    $.robots(options),
+    gulp.dest(dest, {cwd: assets.dist}),
+  ]);
 };
