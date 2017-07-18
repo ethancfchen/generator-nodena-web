@@ -37,7 +37,7 @@
   "dependencies": {
     "chalk": "^2.0.1",
     "command-exists": "^1.2.2",
-    "generator-nodena": "^0.2.1",
+    "generator-nodena": "^0.2.2",
     "yeoman-generator": "^1.1.1",
     "yosay": "^2.0.0"
   },
