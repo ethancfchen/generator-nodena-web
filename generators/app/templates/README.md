@@ -242,7 +242,18 @@ Example:
 
 ### doiuse
 
-Default: `false`
+Default:
+
+```json
+{
+  "browsers": [
+    "last 2 version",
+    "> 5%",
+    "not ie < 11",
+    "not ie_mob < 11"
+  ]
+}
+```
 
 Setup for [doiuse][doiuse].
 
@@ -260,9 +271,25 @@ Example:
 }
 ```
 
+```json
+{
+  "doiuse": false
+}
+```
+
 ### modernizr
 
-Default: `false`
+Default:
+
+```json
+{
+  "options": [
+    "prefixed",
+    "addTest",
+    "setClasses"
+  ]
+}
+```
 
 Customize build options for [Modernizr][Modernizr].
 
@@ -287,6 +314,37 @@ Example:
 ```json
 {
   "modernizr": false
+}
+```
+
+### uglify
+
+Default:
+
+```json
+{
+  "output": {
+    "beautify": false,
+    "comments": "/^\/*!/"
+  }
+}
+```
+
+Setup for [gulp-uglify][gulp-uglify].
+
+Example:
+
+```json
+{
+  "uglify": {
+    "mangle": {
+      "topLevel": true
+    },
+    "output": {
+      "beautify": false,
+      "comments": "/^\/*!/"
+    }
+  }
 }
 ```
 
@@ -599,6 +657,7 @@ gulp jsdoc
 [gulp-pug]: https://github.com/pugjs/gulp-pug/
 [gulp-sass]: https://github.com/dlmanning/gulp-sass/
 [gulp-task-loader]: https://github.com/hontas/gulp-task-loader/
+[gulp-uglify]: https://github.com/terinjokes/gulp-uglify/
 [node-http-proxy#options]: https://github.com/nodejitsu/node-http-proxy#options
 [npm-url]: https://npmjs.org/package/generator-nodena-web/
 [pug-lint]: https://github.com/pugjs/pug-lint/

@@ -30,9 +30,18 @@
       "not ie_mob < 11"
     ]
   },
-  "modernizr": false,
+  "modernizr": {
+    "options": [
+      "prefixed",
+      "addTest",
+      "setClasses"
+    ]
+  },
   "uglify": {
-    "preserveComments": "license"
+    "output": {
+      "beautify": false,
+      "comments": "/^\/*!/"
+    }
   },
   "imagemin": {
     "main": {

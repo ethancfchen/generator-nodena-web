@@ -1,9 +1,10 @@
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
+const pump = require('pump');
 
 const Setup = require('setup/setup');
 
-module.exports = function() {
+module.exports = function(cb) {
   const env = this.opts.env;
   const browserSync = this.opts.browserSync;
 
@@ -25,14 +26,14 @@ module.exports = function() {
       .pipe($.util.noop());
   }
 
-  return gulp
-    .src(src, {cwd: assets.base.src})
-    .pipe($.if(setup.isLocal, $.plumber()))
-    .pipe($.if(setup.isVerbose, $.sourcemaps.init()))
-    .pipe($.include())
-    .pipe($.modernizr(options))
-    .pipe($.if(setup.isOnline, $.uglify(uglifyOpts)))
-    .pipe($.if(setup.isVerbose, $.sourcemaps.write()))
-    .pipe(gulp.dest(dest, {cwd: assets.dist}))
-    .pipe(browserSync.stream());
+  pump([
+    gulp.src(src, {cwd: assets.base.src}),
+    $.if(setup.isLocal, $.plumber()),
+    $.if(setup.isVerbose, $.sourcemaps.init()),
+    $.modernizr(options),
+    $.if(setup.isOnline, $.uglify(uglifyOpts)),
+    $.if(setup.isVerbose, $.sourcemaps.write()),
+    gulp.dest(dest, {cwd: assets.dist}),
+    browserSync.stream(),
+  ], cb);
 };
