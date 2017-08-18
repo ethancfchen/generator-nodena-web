@@ -22,9 +22,7 @@ class PluginGulpPug {
     const env = config.env;
 
     const version = assetsHelper.getPackageJsonVersion();
-    const globals = config.globals || {};
-
-    const pugData = globals.pug || {};
+    const pugData = (config.globals || {}).pug;
 
     this.pretty = argv.verbose;
     this.locals = _.merge({

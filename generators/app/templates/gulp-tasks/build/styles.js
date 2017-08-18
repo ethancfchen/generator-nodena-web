@@ -35,8 +35,7 @@ module.exports = function() {
   ];
   const preprocessOpts = setup.plugins.gulpPreprocess;
 
-  const globals = setup.globals;
-  const sassData = globals.sass;
+  const sassData = (setup.globals || {}).sass;
   const filterOptions = preprocessOpts.filter.sass;
   const $filter = filterOptions ?
     $.filter(filterOptions, {restore: true}) :

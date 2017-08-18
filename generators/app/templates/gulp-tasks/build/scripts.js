@@ -23,8 +23,7 @@ module.exports = function() {
   const uglifyOpts = setup.uglify || {};
   const preprocessOpts = setup.plugins.gulpPreprocess;
 
-  const globals = setup.globals || {};
-  const jsData = globals.js;
+  const jsData = (setup.globals || {}).js;
   const filterOpts = preprocessOpts.filter.js;
   const $filter = filterOpts ?
     $.filter(filterOpts, {restore: true}) :

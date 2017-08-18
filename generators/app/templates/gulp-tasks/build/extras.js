@@ -11,8 +11,7 @@ module.exports = function() {
   const assets = setup.assets;
   const preprocessOpts = setup.plugins.gulpPreprocess;
 
-  const globals = setup.globals || {};
-  const extrasData = globals.extras;
+  const extrasData = (setup.globals || {}).extras;
   const isPreprocess = !_.isEmpty(extrasData);
   const filterOpts = preprocessOpts.filter.extras;
   const $filter = filterOpts ?
