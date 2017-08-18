@@ -1,24 +1,20 @@
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
 
-const Setup = require('setup/setup');
+const setup = require('setup/setup');
 
 module.exports = function() {
-  const env = this.opts.env;
   const browserSync = this.opts.browserSync;
 
-  const setup = new Setup(env);
   const assets = setup.assets;
-  const pref = setup.getPreference();
-
   const src = assets.src.docs;
-  const dest = pref.root;
+  const dest = setup.root;
 
   const options = setup.plugins.gulpPug;
 
   return gulp.src(src, {cwd: assets.base.src})
-    .pipe($.if(setup.isLocal, $.plumber()))
+    .pipe($.if(!setup.isOnline, $.plumber()))
     .pipe($.pug(options))
-    .pipe(gulp.dest(dest, {cwd: assets.dist}))
+    .pipe(gulp.dest(dest, {cwd: assets.build}))
     .pipe(browserSync.stream());
 };

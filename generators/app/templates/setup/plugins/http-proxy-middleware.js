@@ -1,3 +1,5 @@
+const config = require('config');
+
 const _ = require('lodash');
 
 /**
@@ -9,15 +11,14 @@ const _ = require('lodash');
  * const PluginHttpProxyMiddleware =
  *      require('./plugins/http-proxy-middleware');
  * const pluginHttpProxyMiddleware =
- *      new PluginHttpProxyMiddleware(options, assets);
+ *      new PluginHttpProxyMiddleware();
  *
  * @see {@link https://github.com/chimurai/http-proxy-middleware/|Github}
  * @see {@link https://github.com/chimurai/http-proxy-middleware#options|Avaliable Options}
  */
 class PluginHttpProxyMiddleware {
-  constructor(options, assets) {
-    const pref = assets.getPreference();
-    const proxy = pref.proxy || [];
+  constructor() {
+    const proxy = config.proxy || [];
 
     this.proxies = _(proxy).map((item) => {
       return {

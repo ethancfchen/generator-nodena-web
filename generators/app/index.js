@@ -13,6 +13,9 @@ const ASSETS = {
     'src/extras',
   ],
   copy: [{
+    src: 'config/**/*',
+    dest: 'config',
+  }, {
     src: 'setup/**/*',
     dest: 'setup',
   }, {
@@ -29,7 +32,6 @@ const ASSETS = {
     '.pug-lintrc',
     '.sass-lint.yml',
     'README.md',
-    'setup.json',
     'gulptasks.js',
   ],
 };

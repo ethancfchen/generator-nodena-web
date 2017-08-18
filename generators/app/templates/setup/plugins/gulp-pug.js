@@ -1,5 +1,9 @@
+const config = require('config');
+
 const _ = require('lodash');
 const moment = require('moment');
+
+const argv = require('../argv');
 
 /**
  * Plugin Setup: gulp-pug
@@ -8,35 +12,32 @@ const moment = require('moment');
  *
  * @example {@lang javascript}
  * const PluginGulpPug = require('./plugins/gulp-pug');
- * const pluginGulpPug = new PluginGulpPug(options, assets);
+ * const pluginGulpPug = new PluginGulpPug(assetsHelper);
  *
  * @see {@link https://github.com/jamen/gulp-pug/|Github}
  * @see {@link https://pugjs.org/api/reference.html#options|Avaliable Options}
  */
 class PluginGulpPug {
-  constructor(options, assets) {
-    const env = options.env;
-    const argv = options.argv || {};
-    const pref = assets.getPreference();
+  constructor(assetsHelper) {
+    const env = config.env;
 
-    const version = assets.getPackageJsonVersion();
-    const globals = pref.globals || {};
-    const overrides = (pref[env] || {}).globals;
+    const version = assetsHelper.getPackageJsonVersion();
+    const globals = config.globals || {};
 
     const pugData = globals.pug || {};
-    const overridePugData = (overrides || {}).pug;
 
     this.pretty = argv.verbose;
     this.locals = _.merge({
       /* Constants */
+
       ENV: env,
       VERSION: version,
-      DOMAIN: assets.domain,
+      DOMAIN: config.domain,
 
       /* Utilities */
       _,
       moment,
-    }, pugData, overridePugData);
+    }, pugData);
   }
 }
 

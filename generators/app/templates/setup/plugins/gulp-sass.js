@@ -1,3 +1,5 @@
+const config = require('config');
+
 const _ = require('lodash');
 
 /**
@@ -7,26 +9,14 @@ const _ = require('lodash');
  *
  * @example {@lang javascript}
  * const PluginGulpSass = require('./plugins/gulp-sass');
- * const pluginGulpSass = new PluginGulpSass(options, assets);
+ * const pluginGulpSass = new PluginGulpSass();
  *
  * @see {@link https://github.com/sass/|Github}
  * @see {@link https://github.com/sass/node-sass#options|Avaliable Options}
  */
 class PluginGulpSass {
-  constructor(options, assets) {
-    const env = options.env;
-    const pref = assets.getPreference();
-
-    const sassOptions = pref.sass || {};
-
-    this.outputStyle = {
-      local: 'expanded',
-      bypass: 'compressed',
-      stage: 'compressed',
-      live: 'compressed',
-    }[env];
-
-    _.merge(this, sassOptions);
+  constructor() {
+    _.merge(this, config.sass || {});
   }
 }
 

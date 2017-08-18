@@ -1,3 +1,5 @@
+const config = require('config');
+
 /**
  * Plugin Setup: gulp-preprocess
  *
@@ -5,26 +7,25 @@
  *
  * @example {@lang javascript}
  * const PluginGulpPreprocess = require('./plugins/gulp-preprocess');
- * const pluginGulpPreprocess = PluginGulpPreprocess(options, assets);
+ * const pluginGulpPreprocess = PluginGulpPreprocess(assetsHelper);
  *
  * @see {@link https://github.com/jas/gulp-preprocess/|Github}
  */
 class PluginGulpPreprocess {
-  constructor(options, assets) {
-    const env = options.env;
-    const version = assets.getPackageJsonVersion();
+  constructor(assetsHelper) {
+    const env = config.env;
+    const version = assetsHelper.getPackageJsonVersion();
 
-    const pref = assets.getPreference();
-
-    const filterOptions = (pref.preprocess || {}).filter || {};
+    const filterOptions = (config.preprocess || {}).filter || {};
 
     this.context = {
       ENV: env,
       VERSION: version,
-      DOMAIN: assets.domain,
+      DOMAIN: config.domain,
     };
 
     /* Custom */
+
     this.filter = filterOptions;
   }
 }

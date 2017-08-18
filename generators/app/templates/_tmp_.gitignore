@@ -7,8 +7,9 @@ npm-debug.log*
 node_modules
 bower_components
 
-# Distination
-dist
+# Build
+build
+!gulp-tasks/build
 
 # Online
 online/patches

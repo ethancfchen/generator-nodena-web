@@ -1,3 +1,5 @@
+const config = require('config');
+
 /**
  * Plugin Setup: gulp-robots
  *
@@ -5,16 +7,14 @@
  *
  * @example {@lang javascript}
  * const PluginGulpRobots = require('./plugins/gulp-robots');
- * const pluginGulpRobots = new PluginGulpRobots(options, assets);
+ * const pluginGulpRobots = new PluginGulpRobots();
  *
  * @see {@link https://github.com/haydenbleasel/robots-generator/|Github}
  */
 class PluginGulpRobots {
-  constructor(options, assets) {
-    const pref = assets.getPreference();
-
-    const domain = assets.domain;
-    const robots = pref.robots || {};
+  constructor() {
+    const domain = config.domain;
+    const robots = config.robots || {};
 
     this.useragent = '*';
     this.allow = robots.allow;

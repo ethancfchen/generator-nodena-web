@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
 
+const path = require('path');
 const _ = require('lodash');
 
 const doiuse = require('doiuse');
@@ -11,28 +12,18 @@ const mergeLonghand = require('postcss-merge-longhand');
 const mergeRules = require('postcss-merge-rules');
 const clipPathPolyfill = require('postcss-clip-path-polyfill');
 
-const Setup = require('setup/setup');
-
-function getGlobals(pref, env) {
-  const key = 'sass';
-  const globals = (pref.globals || {})[key] || {};
-  const overrides = ((pref[env] || {}).globals || {})[key];
-  return _.merge(globals, overrides);
-}
+const setup = require('setup/setup');
 
 module.exports = function() {
-  const env = this.opts.env;
   const browserSync = this.opts.browserSync;
 
-  const setup = new Setup(env);
   const assets = setup.assets;
-  const pref = setup.getPreference();
 
   const src = assets.src.styles;
-  const dest = pref.root + assets.dest.styles;
+  const dest = path.join(setup.root, assets.dest.styles);
 
   const sassOpts = setup.plugins.gulpSass;
-  const doiuseOpts = pref.doiuse;
+  const doiuseOpts = setup.doiuse;
   let postcssOpts = [
     cssnext,
     grandientfixer,
@@ -44,7 +35,8 @@ module.exports = function() {
   ];
   const preprocessOpts = setup.plugins.gulpPreprocess;
 
-  const sassData = getGlobals(pref, env);
+  const globals = setup.globals;
+  const sassData = globals.sass;
   const filterOptions = preprocessOpts.filter.sass;
   const $filter = filterOptions ?
     $.filter(filterOptions, {restore: true}) :
@@ -55,7 +47,7 @@ module.exports = function() {
   preprocessOpts.context = _.merge(preprocessOpts.context, sassData);
 
   return gulp.src(src, {cwd: assets.base.src})
-    .pipe($.if(setup.isLocal, $.plumber()))
+    .pipe($.if(!setup.isOnline, $.plumber()))
     .pipe($.if(setup.isVerbose, $.sourcemaps.init()))
     .pipe($.sass(sassOpts).on('error', $.sass.logError))
     .pipe($.postcss(postcssOpts))
@@ -63,6 +55,6 @@ module.exports = function() {
     .pipe($filter)
     .pipe($.preprocess(preprocessOpts))
     .pipe($filterRestore)
-    .pipe(gulp.dest(dest, {cwd: assets.dist}))
+    .pipe(gulp.dest(dest, {cwd: assets.build}))
     .pipe(browserSync.stream());
 };

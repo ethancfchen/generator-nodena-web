@@ -1,5 +1,9 @@
 const runSequence = require('run-sequence');
 
+const setup = require('setup/setup');
+
+runSequence.options.ignoreUndefinedTasks = true;
+
 module.exports = function(taskCallback) {
   runSequence(
     'build:clean',
@@ -12,6 +16,13 @@ module.exports = function(taskCallback) {
       'build:images',
       'build:extras',
     ],
+
+    setup.sitemap ? 'build:sitemap' : null,
+    setup.robots ? 'build:robots' : null,
+
+    setup.browserSync ? 'browserSync' : null,
+    setup.browserSync ? 'watch' : null,
+
     taskCallback
   );
 };

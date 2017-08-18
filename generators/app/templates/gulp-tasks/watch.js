@@ -1,13 +1,11 @@
 const gulp = require('gulp');
 
+const path = require('path');
 const bsHtmlInjector = require('bs-html-injector');
 
-const Setup = require('setup/setup');
+const setup = require('setup/setup');
 
 module.exports = function() {
-  const env = this.opts.env;
-
-  const setup = new Setup(env);
   const assets = setup.assets;
 
   const watches = assets.watch;
@@ -20,5 +18,5 @@ module.exports = function() {
   );
   gulp.watch(watches.images, ['build:images']);
   gulp.watch(watches.extras, ['build:extras']);
-  gulp.watch(assets.dist + assets.dest.docs, bsHtmlInjector);
+  gulp.watch(path.join(assets.build, assets.dest.docs), bsHtmlInjector);
 };
