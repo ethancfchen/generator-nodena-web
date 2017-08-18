@@ -8,8 +8,8 @@ module.exports = {
   root: '',
   server: {
     port: argv.port || 8080,
-    index: 'index.html',
     https: false,
+    index: 'index.html',
   },
   proxy: [],
   globals: {

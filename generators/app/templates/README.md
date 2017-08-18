@@ -16,58 +16,59 @@
 
 ## File Structure
 
-| File/Directory              | Description                                                 |
-|-----------------------------|-------------------------------------------------------------|
-| `gulp-tasks/`               | [Gulp][Gulp] task definitions                               |
-| `setup/`                    | Project setup helpers                                       |
-| `setup/base/`               | Project setup base                                          |
-| `setup/base/assets.js`      | Project base assets                                         |
-| `setup/base/plugins.js`     | Project base plugin setup details                           |
-| `setup/plugins/`            | Project plugin setup details                                |
-| `setup/assets.js`           | Extended project assets                                     |
-| `setup/plugins.js`          | Extended project plugin setups                              |
-| `setup/setup.js`            | Main setup helpers                                          |
-| `src/`                      | Source files                                                |
-| `src/docs/`                 | HTML document sources                                       |
-| `src/sass/`                 | Stylesheet sources                                          |
-| `src/js/`                   | Script sources                                              |
-| `src/img/`                  | Images sources                                              |
-| `src/extras/`               | `favicon` and `sitemap.xml` etc.                            |
-| `res/`                      | Resources, including docs, sql, etc.                        |
-| `res/changelog.template.md` | Markdown template for changelog                             |
-| `dist/`                     | Temporary build files for developement/debug                |
-| `docs/`                     | [JSDoc][JSDoc] generated files                              |
-| `online/`                   | Files for online sites                                      |
-| `online/stage/`             | Files for stage site                                        |
-| `online/live/`              | Files for live site                                         |
-| `online/patches/`           | Patch files for each version                                |
-| `node_modules/`             | Dependent packages for Node.js                              |
-| `.editorconfig`             | Editor config file for editors                              |
-| `.eslintrc`                 | Setup file for [ESlint][ESlint]                             |
-| `.gitignore`                | Ignored files list for [Git][Git]                           |
-| `.pug-lintrc`               | Setup file for [pug-lint][pug-lint]                         |
-| `.sass-lint.yml`            | Setup file for [sass-lint][sass-lint]                       |
-| `gulpfile.js`               | Project main workflow                                       |
-| `gulptasks.js`              | Custom task loader for [gulp-task-loader][gulp-task-loader] |
-| `package.json`              | Project meta information                                    |
-| `setup.json`                | Project setup variables                                     |
-| `README.md`                 | This readme file                                            |
-| `CHANGELOG.md`              | Auto generated change log                                   |
+|        File/Directory         |                         Description                         |
+| ----------------------------- | ----------------------------------------------------------- |
+| `gulp-tasks/`                 | [Gulp][Gulp] task definitions                               |
+| `config/`                     | [Config][node-config] files                                 |
+| `setup/`                      | Project setup helpers                                       |
+| `setup/base/`                 | Project setup base                                          |
+| `setup/base/assets-helper.js` | Project assets helper                                       |
+| `setup/base/plugins.js`       | Project plugin setup helper                                 |
+| `setup/plugins/`              | Project plugin setup details                                |
+| `setup/assets.js`             | Extended project assets                                     |
+| `setup/plugins.js`            | Extended project plugin setups                              |
+| `setup/setup.js`              | Main setup helpers                                          |
+| `src/`                        | Source files                                                |
+| `src/docs/`                   | HTML document sources                                       |
+| `src/sass/`                   | Stylesheet sources                                          |
+| `src/js/`                     | Script sources                                              |
+| `src/img/`                    | Images sources                                              |
+| `src/extras/`                 | `favicon` and `sitemap.xml` etc.                            |
+| `res/`                        | Resources, including docs, sql, etc.                        |
+| `res/changelog.template.md`   | Markdown template for changelog                             |
+| `build/`                      | Build files for developement/debug                          |
+| `docs/`                       | [JSDoc][JSDoc] generated files                              |
+| `online/`                     | Build files for online sites                                |
+| `online/patches/`             | Patch files for each version                                |
+| `node_modules/`               | Dependent packages for Node.js                              |
+| `.editorconfig`               | Editor config file for editors                              |
+| `.eslintignore`               | Ignored files list for [ESlint][ESlint]                     |
+| `.eslintrc.js`                | Setup file for [ESlint][ESlint]                             |
+| `.gitignore`                  | Ignored files list for [Git][Git]                           |
+| `.pug-lintrc`                 | Setup file for [pug-lint][pug-lint]                         |
+| `.sass-lint.yml`              | Setup file for [sass-lint][sass-lint]                       |
+| `gulpfile.js`                 | Project main workflow                                       |
+| `gulptasks.js`                | Custom task loader for [gulp-task-loader][gulp-task-loader] |
+| `package.json`                | Project meta information                                    |
+| `README.md`                   | This readme file                                            |
+| `CHANGELOG.md`                | Auto generated change log                                   |
 
-## Environment Setup (`setup.json`)
+## Environment Setup (`config/*`)
+
+See [documents of `node-config`][node-config] for more information.
 
 ### root
 
-Default: `./`
+Default: `(empty)`
 
-Path to project root, it'll be created if not exist.
+Path to destination root, it'll be created if not exist.
 
 Example:
 
-```json
-{
-  "root": "cms/"
-}
+```javascript
+module.exports = {
+  root: 'cms/',
+};
 ```
 
 ### server
@@ -82,19 +83,19 @@ Options:
 
 Example:
 
-```json
-{
-  "server": {
-    "port": 8080,
-    "https": true,
-    "index": "index.html"
-  }
-}
+```javascript
+module.exports = {
+  server: {
+    port: 8080,
+    https: true,
+    index: 'index.html',
+  },
+};
 ```
 
 ### proxy
 
-Default: `null`
+Default: `[]`
 
 Assign proxy to [BrowserSync][BrowserSync].
 
@@ -105,23 +106,23 @@ Options:
 
 Example:
 
-```json
-{
-  "proxy": [{
-    "uri": "/api",
-    "options": {
-      "target": "https://mydomain.com",
-      "changeOrigin": true,
-      "secure": false
-    }
+```javascript
+module.exports = {
+  proxy: [{
+    uri: '/api',
+    options: {
+      target: 'https://mydomain.com',
+      changeOrigin: true,
+      secure: false,
+    },
   }, {
-    "uri": "/upload",
-    "options": {
-      "target": "http://mydomain.com",
-      "changeOrigin": true
-    }
-  }]
-}
+    uri: '/upload',
+    options: {
+      target: 'http://mydomain.com',
+      changeOrigin: true,
+    },
+  }],
+};
 ```
 
 All requests on `/api` will proxy to `https://mydomain.com/api`,
@@ -143,22 +144,22 @@ Options:
 
 Example:
 
-```json
-{
-  "globals": {
-    "pug": {
-      "LINK": {
-        "GOOGLE": "https://www.google.com/"
-      }
+```javascript
+module.exports = {
+  globals: {
+    pug: {
+      LINK: {
+        GOOGLE: 'https://www.google.com/',
+      },
     },
-    "sass": {
-      "COLOR_BLACK": "#111"
+    sass: {
+      COLOR_BLACK: '#111',
     },
-    "js": {
-      "SALT": "Y3Dhkl4W"
-    }
-  }
-}
+    js: {
+      SALT: 'Y3Dhkl4W',
+    },
+  },
+};
 ```
 
 In [Pug][Pug] files:
@@ -212,14 +213,14 @@ Options:
 
 Example:
 
-```json
-{
-  "preprocess": {
-    "filter": {
-      "extras": ["**/*.js"]
-    }
-  }
-}
+```javascript
+module.exports = {
+  preprocess: {
+    filter: {
+      extras: ['**/*.js'],
+    },
+  },
+};
 ```
 
 #### sass
@@ -228,67 +229,77 @@ Setup for [gulp-sass][gulp-sass].
 
 Example:
 
-```json
-{
-  "sass": {
-    "includePaths": [
-      "node_modules/breakpoint-sass/stylesheets",
-      "node_modules/normalize-scss/fork-versions/default",
-      "node_modules/upport-for/sass"
-    ]
-  }
-}
+```javascript
+module.exports = {
+  sass: {
+    outputStyle: 'expanded',
+    includePaths: [
+      'node_modules/breakpoint-sass/stylesheets',
+      'node_modules/normalize-scss/fork-versions/default',
+      'node_modules/upport-for/sass',
+    ],
+  },
+};
 ```
 
 ### doiuse
 
 Default:
 
-```json
-{
-  "browsers": [
-    "last 2 version",
-    "> 5%",
-    "not ie < 11",
-    "not ie_mob < 11"
-  ]
-}
+```javascript
+module.exports = {
+  doiuse: {
+    browsers: [
+      'last 2 version',
+      '> 5%',
+      'not ie < 11',
+      'not ie_mob < 11',
+    ],
+    ignore: [
+      'viewport-units',
+      'css-appearance',
+      'flexbox',
+      'text-size-adjust',
+      'rem',
+    ],
+  },
+};
 ```
 
 Setup for [doiuse][doiuse].
 
 Example:
 
-```json
-{
-  "doiuse": {
-    "browsers": [
-      "last 2 version",
-      "> 5%",
-      "ie >= 10"
-    ]
-  }
-}
+```javascript
+module.exports = {
+  doiuse: {
+    browsers: [
+      'last 2 version',
+      '> 5%',
+      'ie >= 10',
+    ],
+  },
+};
 ```
 
-```json
-{
-  "doiuse": false
-}
+```javascript
+module.exports = {
+  doiuse: false
+};
 ```
 
 ### modernizr
 
 Default:
 
-```json
-{
-  "options": [
-    "prefixed",
-    "addTest",
-    "setClasses"
-  ]
-}
+```javascript
+module.exports = {
+  options: [
+    'prefixed',
+    'addTest',
+    'setClasses',
+  ],
+};
 ```
 
 Customize build options for [Modernizr][Modernizr].
@@ -297,55 +308,57 @@ Set 'false' to disable.
 
 Example:
 
-```json
-{
-  "modernizr": {
-    "options" : [
-      "setClasses",
-      "addTest",
-      "html5printshiv",
-      "testProp",
-      "fnBind"
-    ]
-  }
-}
+```javascript
+module.exports = {
+  modernizr: {
+    options : [
+      'setClasses',
+      'addTest',
+      'html5printshiv',
+      'testProp',
+      'fnBind',
+    ],
+  },
+};
 ```
 
-```json
-{
-  "modernizr": false
-}
+```javascript
+module.exports = {
+  modernizr: false,
+};
 ```
 
 ### uglify
 
 Default:
 
-```json
-{
-  "output": {
-    "beautify": false,
-    "comments": "/^\/*!/"
-  }
-}
+```javascript
+module.exports = {
+  uglify: {
+    output: {
+      beautify: false,
+      comments: /^\/*!/,
+    },
+  },
+};
 ```
 
 Setup for [gulp-uglify][gulp-uglify].
 
 Example:
 
-```json
-{
-  "uglify": {
-    "mangle": {
-      "topLevel": true
+```javascript
+module.exports = {
+  uglify: {
+    mangle: {
+      topLevel: true,
     },
-    "output": {
-      "beautify": false,
-      "comments": "/^\/*!/"
-    }
-  }
-}
+    output: {
+      beautify: false,
+      comments: /^\/*!/,
+    },
+  },
+};
 ```
 
 ### imagemin
@@ -360,44 +373,23 @@ Setup for [gulp-imagemin][gulp-imagemin].
 
 Example:
 
-```json
-{
-  "imagemin": {
-    "main": {
-      "verbose": true
+```javascript
+module.exports = {
+  imagemin: {
+    main: {
+      verbose: true,
     },
-    "plugins": {
-      "gifsicle": {
-        "interlaced": true
+    plugins: {
+      gifsicle: {
+        interlaced: true,
       },
-      "jpegtran": {
-        "progressive": true
+      jpegtran: {
+        progressive: true,
       },
-      "optipng": { },
-      "svgo": { },
-      "giflossy": {
-        "interlaced": true
-      },
-      "jpegrecompress": {
-        "progressive": true
-      },
-      "jpegoptim": {
-        "progressive": true
-      },
-      "mozjpeg": {
-        "progressive": true
-      },
-      "advpng": { },
-      "pngcrush": {
-        "reduce": true
-      },
-      "pngout": { },
-      "pngquant": { },
-      "zopfli": {
-        "more": true
-      }
-    }
-  }
+      optipng: { },
+      svgo: { },
+    },
+  },
 }
 ```
 
@@ -407,19 +399,19 @@ Copy files from source to destination.
 
 Example:
 
-```json
-{
-  "copy": [{
-    "src": "node_modules/webcamjs/webcam.swf",
-    "dest": "js"
+```javascript
+module.exports = {
+  copy: [{
+    src: "node_modules/webcamjs/webcam.swf",
+    dest: "js",
   }, {
-    "src": [
+    src: [
       "iframe-resizer/js/iframeResizer.contentWindow.min.js",
-      "malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"
+      "malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js",
     ],
-    "dest": "js"
-  }]
-}
+    dest: "js",
+  }],
+};
 ```
 
 ### robot
@@ -428,52 +420,13 @@ Setup for [Robots Generator][robots-generator].
 
 Example:
 
-```json
-{
-  "robots": {
-    "allow": ["/"],
-    "disallow": ["/api/", "/cms/"]
+```javascript
+module.exports = {
+  robots: {
+    allow: ['/'],
+    disallow: ['/api/', '/cms/']
   }
-}
-```
-
-### Environment Variable
-
-Override constants for different environments.
-
-Avaliable: `local`, `bypass`, `stage`, `live`.
-
-Options:
-
-*   `domain` - The domain of the site.
-*   `proxy` - Override `proxy` options.
-*   `globals` - Override `globals` variables.
-
-Example:
-
-```json
-{
-  "stage": {
-    "domain": "http://www.stage.com",
-    "globals": {
-      "pug": {
-        "VENDOR": {
-          "FB": "123456789"
-        }
-      }
-    }
-  },
-  "live": {
-    "domain": "https://www.live.com",
-    "globals": {
-      "pug": {
-        "VENDOR": {
-          "FB": "987654321"
-        }
-      }
-    }
-  }
-}
+};
 ```
 
 ## [Babel][Babel] Setup ([`.bablerc`](https://babeljs.io/docs/usage/babelrc/))
@@ -537,15 +490,8 @@ module.exports = function (setup) {
 Build the website and open live preview with [BrowserSync][BrowserSync].
 
 ```bash
+export NODE_ENV=development
 gulp
-```
-
-#### Build For Test/Debug in Published Environment (Bypass)
-
-Build the website and open live preview with [BrowserSync][BrowserSync].
-
-```bash
-gulp bypass
 ```
 
 #### Publish For Stage Site
@@ -554,16 +500,17 @@ Build the website for stage, all files will generated in ```online/stage/```
 and create a version patch to ```online/patches/<version>```.
 
 ```bash
-gulp stage
+export NODE_ENV=stage
+gulp
 ```
 
-#### Publish For Live Site
+#### Publish For Production Site
 
-Build the website for stage, all files will generated in ```online/live/```
-and create a version patch to ```online/patches/<version>```.
+Build the website for stage, all files will generated in ```online/production/```
 
 ```bash
-gulp live
+export NODE_ENV=production
+gulp
 ```
 
 #### Build Options
@@ -576,38 +523,20 @@ Disable all compression and show detailed debug information on console.
 gulp -b
 ```
 
-##### Version (default: prerelease/patch)
+##### Version (default: patch)
 
 Increace version number using [semver][semver].
 
-###### Prerelease (Only for stage) => 1.0.x-stage.x
+###### Patch
 
 ```bash
-gulp stage
+gulp release:version -v patch
 ```
 
-###### Patch (Only for live)
+###### Prerelease with `preid`
 
 ```bash
-gulp live
-```
-
-###### Minor (Only for live) => 1.x.0
-
-```bash
-gulp live -v minor
-```
-
-###### Major (Only for live) => x.0.0
-
-```bash
-gulp live -v major
-```
-
-###### Manually (Only for live)
-
-```bash
-gulp live -v 1.0.1
+gulp release:version -v prerelease --preid=stage
 ```
 
 ##### Port for BrowserSync (default: 8080)
@@ -625,6 +554,7 @@ gulp -p 8081
 Copy optimized images of [gulp-imagemin][gulp-imagemin] from destination folder to source folder.
 
 ```bash
+export NODE_ENV=production
 gulp save
 ```
 
@@ -658,6 +588,7 @@ gulp jsdoc
 [gulp-sass]: https://github.com/dlmanning/gulp-sass/
 [gulp-task-loader]: https://github.com/hontas/gulp-task-loader/
 [gulp-uglify]: https://github.com/terinjokes/gulp-uglify/
+[node-config]: https://github.com/lorenwest/node-config/
 [node-http-proxy#options]: https://github.com/nodejitsu/node-http-proxy#options
 [npm-url]: https://npmjs.org/package/generator-nodena-web/
 [pug-lint]: https://github.com/pugjs/pug-lint/
