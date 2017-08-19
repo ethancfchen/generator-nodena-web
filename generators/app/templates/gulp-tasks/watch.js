@@ -13,7 +13,7 @@ module.exports = function() {
   gulp.watch(watches.docs, ['build:docs']);
   gulp.watch(watches.styles, ['build:styles']);
   gulp.watch(
-    [watches.scripts, watches.webpack],
+    [watches.scripts],
     ['build:scripts', 'build:modernizr']
   );
   gulp.watch(watches.images, ['build:images']);
