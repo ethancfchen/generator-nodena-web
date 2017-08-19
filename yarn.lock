@@ -1090,12 +1090,13 @@ generate-object-property@^1.1.0:
   dependencies:
     is-property "^1.0.0"
 
-generator-nodena@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/generator-nodena/-/generator-nodena-0.4.0.tgz#d5c3345650e0c9c533e4f497c469f7f395400452"
+generator-nodena@^0.4.1:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/generator-nodena/-/generator-nodena-0.4.2.tgz#3d35b0450cb962b467fd7fb7db553a89f52e6cdd"
   dependencies:
     chalk "^2.0.1"
     command-exists "^1.2.2"
+    sort-package-json "^1.7.0"
     yeoman-generator "^1.1.1"
     yosay "^2.0.0"
 
