@@ -101,6 +101,11 @@ module.exports = {
     build: defer((config) => {
       return config.assets.base.build;
     }),
+    online: {
+      patches: defer((config) => {
+        return path.join(config.assets.base.online, 'patches');
+      }),
+    },
     dest: {
       docs: '**/*.html',
       styles: 'css',
