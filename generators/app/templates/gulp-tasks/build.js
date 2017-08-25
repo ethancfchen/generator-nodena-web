@@ -25,6 +25,6 @@ module.exports = function() {
     setup.browserSync ? 'browserSync' : null,
     setup.browserSync ? 'watch' : null,
 
-    () => gutil.log(chalk.green('Build Successful.'))
+    () => gutil.log(chalk.green('Build Completed.'))
   );
 };
