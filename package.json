@@ -1,6 +1,6 @@
 {
   "name": "generator-nodena-web",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "description": "Nodena web Yeoman generator",
   "homepage": "https://github.com/ethancfchen/generator-nodena-web",
   "author": {
@@ -45,7 +45,8 @@
   "scripts": {
     "prepublish": "nsp check",
     "pretest": "eslint . --fix",
-    "test": "jest --config .jestrc.js --coverage"
+    "test": "jest --config .jestrc.js --coverage",
+    "release": "git push && git push --tags"
   },
   "repository": "https://github.com/ethancfchen/generator-nodena-web.git",
   "license": "MIT"
