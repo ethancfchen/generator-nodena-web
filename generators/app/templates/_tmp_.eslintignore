@@ -3,6 +3,8 @@ bower_components
 node_modules
 gulp-tasks
 setup
+build
+dist
 .eslintrc.js
 gulpfile.js
 gulptasks.js

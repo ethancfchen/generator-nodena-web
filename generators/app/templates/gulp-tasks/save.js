@@ -6,9 +6,11 @@ const setup = require('setup/setup');
 module.exports = function() {
   const assets = setup.assets;
 
-  const src = path.join(setup.root, assets.src.images);
+  const srcs = assets.src.images.map((imagePath) => {
+    return path.join(setup.root, imagePath);
+  });
   const dest = assets.dest.images;
 
-  return gulp.src(src, {cwd: assets.build})
+  return gulp.src(srcs, {cwd: assets.build})
     .pipe(gulp.dest(dest, {cwd: assets.base.src}));
 };

@@ -11,5 +11,5 @@ bower_components
 build
 !gulp-tasks/build
 
-# Online
-online/patches
+# Distribution
+dist
