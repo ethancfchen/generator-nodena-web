@@ -7,7 +7,7 @@ const setup = require('setup/setup');
 module.exports = function() {
   const assets = setup.assets;
 
-  const src = path.join(assets.dist, assets.dest.index);
+  const src = path.join(assets.build, assets.dest.index);
   const dest = setup.root;
 
   const options = setup.plugins.gulpRobots;
