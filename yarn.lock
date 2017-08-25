@@ -1061,9 +1061,9 @@ generate-object-property@^1.1.0:
   dependencies:
     is-property "^1.0.0"
 
-generator-nodena@^0.4.2:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/generator-nodena/-/generator-nodena-0.4.2.tgz#3d35b0450cb962b467fd7fb7db553a89f52e6cdd"
+generator-nodena@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/generator-nodena/-/generator-nodena-0.5.0.tgz#d1037675f0a7f96b73a7be2115fd7d00da4c2394"
   dependencies:
     chalk "^2.0.1"
     command-exists "^1.2.2"

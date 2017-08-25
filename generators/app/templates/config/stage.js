@@ -3,9 +3,6 @@ const defer = require('config/defer').deferConfig;
 
 module.exports = {
   domain: '',
-  sass: {
-    outputStyle: 'compressed',
-  },
 
   /* Helper */
 

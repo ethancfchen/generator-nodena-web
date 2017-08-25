@@ -30,20 +30,16 @@ module.exports = {
     outputStyle: 'expanded',
     includePaths: [],
   },
-  doiuse: {
-    browsers: [
-      'last 2 version',
-      '> 5%',
-      'not ie < 11',
-      'not ie_mob < 11',
-    ],
-    ignore: [
-      'viewport-units',
-      'css-appearance',
-      'flexbox',
-      'text-size-adjust',
-      'rem',
-    ],
+  postcss: {
+    cssnext: {},
+    gradientfixer: {},
+    flexbugsFixes: {},
+    mergeLonghand: {},
+    mergeRules: {},
+    clipPathPolyfill: {},
+    cssnano: {
+      autoprefixer: false,
+    },
   },
   modernizr: {
     options: [

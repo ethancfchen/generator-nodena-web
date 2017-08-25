@@ -34,12 +34,9 @@
 | `src/js/`                     | Script sources                                              |
 | `src/img/`                    | Images sources                                              |
 | `src/extras/`                 | `favicon` and `sitemap.xml` etc.                            |
-| `res/`                        | Resources, including docs, sql, etc.                        |
-| `res/changelog.template.md`   | Markdown template for changelog                             |
 | `build/`                      | Build files for developement/debug                          |
+| `dist/`                       | Distribution files for online sites                         |
 | `docs/`                       | [JSDoc][JSDoc] generated files                              |
-| `online/`                     | Build files for online sites                                |
-| `online/patches/`             | Patch files for each version                                |
 | `node_modules/`               | Dependent packages for Node.js                              |
 | `.editorconfig`               | Editor config file for editors                              |
 | `.eslintignore`               | Ignored files list for [ESlint][ESlint]                     |
@@ -51,7 +48,6 @@
 | `gulptasks.js`                | Custom task loader for [gulp-task-loader][gulp-task-loader] |
 | `package.json`                | Project meta information                                    |
 | `README.md`                   | This readme file                                            |
-| `CHANGELOG.md`                | Auto generated change log                                   |
 
 ## Environment Setup (`config/*`)
 
@@ -242,51 +238,33 @@ module.exports = {
 };
 ```
 
-### doiuse
+**Warning:** Set `outputStyle` as `'compressed'` will cause
+`gulp-preprocess` failed to process conditional block such as `@if/@endif`.
+
+### postcss
 
 Default:
 
 ```javascript
 module.exports = {
-  doiuse: {
-    browsers: [
-      'last 2 version',
-      '> 5%',
-      'not ie < 11',
-      'not ie_mob < 11',
-    ],
-    ignore: [
-      'viewport-units',
-      'css-appearance',
-      'flexbox',
-      'text-size-adjust',
-      'rem',
-    ],
+  postcss: {
+    cssnext: {},
+    gradientfixer: {},
+    flexbugsFixes: {},
+    mergeLonghand: {},
+    mergeRules: {},
+    clipPathPolyfill: {},
+    cssnano: {
+      autoprefixer: false,
+    },
   },
 };
 ```
 
-Setup for [doiuse][doiuse].
+Setup for PostCSS Plugins.
 
-Example:
-
-```javascript
-module.exports = {
-  doiuse: {
-    browsers: [
-      'last 2 version',
-      '> 5%',
-      'ie >= 10',
-    ],
-  },
-};
-```
-
-```javascript
-module.exports = {
-  doiuse: false
-};
-```
+All plugins name will be transformed as `kebab-case` and be loaded with prefix `posecss-`,
+see [avaliable plugins][postcss#plugins].
 
 ### modernizr
 
@@ -368,7 +346,7 @@ Setup for [gulp-imagemin][gulp-imagemin].
 *   `main` - Main option for [gulp-imagemin][gulp-imagemin],
     see [avaliable options](https://github.com/sindresorhus/gulp-imagemin#options).
 *   `plugins` - Add plugins and its options to [gulp-imagemin][gulp-imagemin].
-    All plugins name will be transfored as `kebab-case` and be loaded with prefix `imagemin-`,
+    All plugins name will be transformed as `kebab-case` and be loaded with prefix `imagemin-`,
     see [avaliable plugins](https://www.npmjs.com/browse/keyword/imageminplugin).
 
 Example:
@@ -591,6 +569,7 @@ gulp jsdoc
 [node-config]: https://github.com/lorenwest/node-config/
 [node-http-proxy#options]: https://github.com/nodejitsu/node-http-proxy#options
 [npm-url]: https://npmjs.org/package/generator-nodena-web/
+[postcss#plugins]: https://github.com/postcss/postcss#plugins/
 [pug-lint]: https://github.com/pugjs/pug-lint/
 [robots-generator]: https://github.com/haydenbleasel/robots-generator/
 [sass-lint]: https://github.com/sasstools/sass-lint/
