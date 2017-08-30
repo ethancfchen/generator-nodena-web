@@ -128,6 +128,14 @@ module.exports = {
         return path.join(config.assets.base.src, 'extras/**/*');
       }),
     },
+    jsdoc: {
+      files: [
+        './*.js',
+        './setup/**/*.js',
+        './res/client/js/**/*.js',
+      ],
+      dest: 'doc',
+    },
 
     config: {
       babel: '.babelrc',
