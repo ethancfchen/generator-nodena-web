@@ -31,7 +31,6 @@
     "postcss-gradientfixer": "^0.0.6",
     "postcss-merge-longhand": "^3.0.0",
     "postcss-merge-rules": "^2.1.2",
-    "sort-package-json": "^1.7.1",
     "webpack": "^3.0.0",
     "webpack-stream": "^4.0.0"
   }
