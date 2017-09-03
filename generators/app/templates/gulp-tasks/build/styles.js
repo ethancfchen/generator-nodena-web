@@ -19,7 +19,7 @@ function resolvePlugins(options) {
     } catch (e) {
       modulePath = require.resolve(moduleName);
     }
-    return require(modulePath)(options);
+    return require(modulePath)(pluginOptions);
   }).filter(_.identity).value();
 }
 
