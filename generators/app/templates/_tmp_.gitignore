@@ -13,3 +13,6 @@ build
 
 # Distribution
 dist
+
+# Configuration
+config/local*
