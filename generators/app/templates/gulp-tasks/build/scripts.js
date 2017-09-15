@@ -41,7 +41,7 @@ module.exports = function() {
 
     return gulp.src(src, {cwd: assets.base.src})
       .pipe($.if(!setup.isOnline, $.plumber()))
-      .pipe(webpackStream(webpackOpts, webpack))
+      .pipe(webpackStream({config: webpackOpts}, webpack))
       .pipe(gulp.dest(dest, {cwd: assets.build}))
       .pipe(browserSync.stream());
   }
