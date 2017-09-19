@@ -21,7 +21,7 @@ module.exports = {
   },
   preprocess: {
     filter: {
-      sass: ['**/*.scss'],
+      sass: ['**/*.css'],
       js: ['**/*.js'],
       extras: ['!**/*'],
     },
