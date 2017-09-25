@@ -132,7 +132,6 @@ module.exports = {
       files: [
         './*.js',
         './setup/**/*.js',
-        './res/client/js/**/*.js',
       ],
       dest: 'doc',
     },
