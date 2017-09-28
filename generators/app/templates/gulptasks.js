@@ -5,8 +5,6 @@ const GulpRegistry = require('undertaker-forward-reference');
 
 const browserSync = require('browser-sync').create();
 
-require('rootpath')();
-
 module.exports = function() {
   gulp.registry(new GulpRegistry());
   $.loadAllTasks({
