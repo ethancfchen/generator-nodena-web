@@ -24,7 +24,7 @@ function resolvePlugins(options) {
 }
 
 module.exports = function() {
-  const browserSync = this.opts.browserSync;
+  const browserSync = this.context.browserSync;
 
   const assets = setup.assets;
 

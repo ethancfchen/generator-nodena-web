@@ -1221,9 +1221,9 @@ gauge@~2.7.3:
     strip-ansi "^3.0.1"
     wide-align "^1.1.0"
 
-generator-nodena@^0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/generator-nodena/-/generator-nodena-0.6.1.tgz#8b6ce06685f521e3226227c828b969bf371b4c24"
+generator-nodena@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/generator-nodena/-/generator-nodena-0.7.0.tgz#0f9da238f5f182455a5bc26441f7984121c02484"
   dependencies:
     chalk "^2.0.1"
     command-exists "^1.2.2"

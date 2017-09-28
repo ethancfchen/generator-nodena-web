@@ -6,7 +6,7 @@ const _ = require('lodash');
 const setup = require('setup/setup');
 
 module.exports = function() {
-  const browserSync = this.opts.browserSync;
+  const browserSync = this.context.browserSync;
 
   const assets = setup.assets;
   const preprocessOpts = setup.plugins.gulpPreprocess;

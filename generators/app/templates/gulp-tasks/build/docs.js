@@ -4,7 +4,7 @@ const $ = require('gulp-load-plugins')();
 const setup = require('setup/setup');
 
 module.exports = function() {
-  const browserSync = this.opts.browserSync;
+  const browserSync = this.context.browserSync;
 
   const assets = setup.assets;
   const src = assets.src.docs;
