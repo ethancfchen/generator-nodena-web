@@ -26,6 +26,7 @@
     "gulp-sourcemaps": "^2.6.1",
     "gulp-uglify": "^3.0.0",
     "http-proxy-middleware": "^0.17.4",
+    "merge-stream": "^1.0.1",
     "postcss-clip-path-polyfill": "^1.0.4",
     "postcss-cssnext": "^3.0.2",
     "postcss-flexbugs-fixes": "^3.2.0",
