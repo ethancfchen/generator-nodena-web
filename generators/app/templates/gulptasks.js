@@ -7,9 +7,11 @@ const browserSync = require('browser-sync').create();
 
 require('rootpath')();
 
-gulp.registry(new GulpRegistry());
-$.loadAllTasks({
-  browserSync,
-});
+module.exports = function() {
+  gulp.registry(new GulpRegistry());
+  $.loadAllTasks({
+    browserSync,
+  });
 
-gulp.task('default', gulp.series('build'));
+  gulp.task('default', gulp.series('build'));
+};
