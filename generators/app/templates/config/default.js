@@ -6,7 +6,7 @@ const NODE_APP_INSTANCE = process.env.NODE_APP_INSTANCE;
 const argv = require('../setup/argv');
 
 module.exports = {
-  root: '',
+  root: '.',
   server: {
     port: argv.port || 8080,
     https: false,
