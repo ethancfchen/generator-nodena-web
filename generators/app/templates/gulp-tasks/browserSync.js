@@ -4,7 +4,7 @@ const httpProxy = require('http-proxy-middleware');
 
 const setup = require('setup/setup');
 
-module.exports = function() {
+module.exports = function(taskDone) {
   const browserSync = this.context.browserSync;
 
   const assets = setup.assets;
@@ -29,4 +29,5 @@ module.exports = function() {
   browserSyncOpts.plugins = plugins;
   browserSyncOpts.server.middleware = middleware;
   browserSync.init(browserSyncOpts);
+  taskDone();
 };
