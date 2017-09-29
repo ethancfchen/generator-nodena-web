@@ -6,12 +6,12 @@ const _ = require('lodash');
 
 const setup = require('setup/setup');
 
-module.exports = function() {
+module.exports = function(taskDone) {
   const assets = setup.assets;
 
   const streams = [];
 
-  _(setup.copy).forEach((target, index) => {
+  _(setup.copy).forEach((target) => {
     const src = target.src;
     const dest = path.join(setup.root, target.dest || '');
     streams.push(
@@ -20,5 +20,8 @@ module.exports = function() {
     );
   });
 
-  return merge(streams);
+  if (streams.length > 0) {
+    return merge(streams);
+  }
+  taskDone();
 };
