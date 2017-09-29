@@ -1,5 +1,4 @@
 const path = require('path');
-const _ = require('lodash');
 const httpProxy = require('http-proxy-middleware');
 
 const setup = require('setup/setup');
@@ -22,7 +21,7 @@ module.exports = function(taskDone) {
     },
   });
 
-  _(proxyOpts.proxies).forEach((proxy) => {
+  (proxyOpts.proxies || []).forEach((proxy) => {
     middleware.push(httpProxy(proxy.uri, proxy.options));
   });
 

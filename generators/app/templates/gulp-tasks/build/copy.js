@@ -2,7 +2,6 @@ const gulp = require('gulp');
 const merge = require('merge-stream');
 
 const path = require('path');
-const _ = require('lodash');
 
 const setup = require('setup/setup');
 
@@ -11,7 +10,7 @@ module.exports = function(taskDone) {
 
   const streams = [];
 
-  _(setup.copy).forEach((target) => {
+  (setup.copy || []).forEach((target) => {
     const src = target.src;
     const dest = path.join(setup.root, target.dest || '');
     streams.push(
