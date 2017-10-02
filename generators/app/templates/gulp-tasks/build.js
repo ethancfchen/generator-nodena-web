@@ -11,7 +11,6 @@ const tasks = [
     'build:docs',
     'build:styles',
     'build:scripts',
-    'build:modernizr',
     'build:images',
     'build:extras',
   ]),

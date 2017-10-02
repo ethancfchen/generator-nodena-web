@@ -8,7 +8,6 @@ const appAssets = [
   'gulp-tasks/build/docs.js',
   'gulp-tasks/build/extras.js',
   'gulp-tasks/build/images.js',
-  'gulp-tasks/build/modernizr.js',
   'gulp-tasks/build/robots.js',
   'gulp-tasks/build/scripts.js',
   'gulp-tasks/build/sitemap.js',

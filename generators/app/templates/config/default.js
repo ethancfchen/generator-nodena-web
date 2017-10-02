@@ -41,13 +41,6 @@ module.exports = {
       autoprefixer: false,
     },
   },
-  modernizr: {
-    options: [
-      'prefixed',
-      'addTest',
-      'setClasses',
-    ],
-  },
   uglify: {
     output: {
       beautify: false,

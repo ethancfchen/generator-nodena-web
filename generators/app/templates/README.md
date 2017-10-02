@@ -266,46 +266,6 @@ Setup for PostCSS Plugins.
 All plugins name will be transformed as `kebab-case` and be loaded with prefix `posecss-`,
 see [avaliable plugins][postcss#plugins].
 
-### modernizr
-
-Default:
-
-```javascript
-module.exports = {
-  options: [
-    'prefixed',
-    'addTest',
-    'setClasses',
-  ],
-};
-```
-
-Customize build options for [Modernizr][Modernizr].
-
-Set 'false' to disable.
-
-Example:
-
-```javascript
-module.exports = {
-  modernizr: {
-    options : [
-      'setClasses',
-      'addTest',
-      'html5printshiv',
-      'testProp',
-      'fnBind',
-    ],
-  },
-};
-```
-
-```javascript
-module.exports = {
-  modernizr: false,
-};
-```
-
 ### uglify
 
 Default:
@@ -554,11 +514,9 @@ gulp jsdoc
 [Git]: https://git-scm.com/
 [Gulp]: http://gulpjs.com/
 [JSDoc]: http://usejsdoc.org/
-[Modernizr]: https://modernizr.com/
 [Node.js]: https://nodejs.org/
 [Pug]: http://jade-lang.com/
 [Sass]: http://sass-lang.com/
-[doiuse]: https://github.com/anandthakker/doiuse/
 [gulp-filter]: https://github.com/sindresorhus/gulp-filter/
 [gulp-imagemin]: https://github.com/sindresorhus/gulp-imagemin/
 [gulp-preprocess]: https://github.com/jas/gulp-preprocess/
