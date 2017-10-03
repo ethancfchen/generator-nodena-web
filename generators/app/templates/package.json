@@ -15,7 +15,6 @@
     "gulp-imagemin": "^3.3.0",
     "gulp-include": "^2.3.1",
     "gulp-jsdoc3": "^1.0.1",
-    "gulp-modernizr": "^1.0.0-alpha",
     "gulp-plumber": "^1.1.0",
     "gulp-postcss": "^7.0.0",
     "gulp-preprocess": "^2.0.0",
