@@ -14,7 +14,7 @@ module.exports = function(taskDone) {
   gulp.watch(watches.styles, gulp.parallel('build:styles'));
   gulp.watch(
     [watches.scripts],
-    gulp.parallel('build:scripts', 'build:modernizr')
+    gulp.parallel('build:scripts')
   );
   gulp.watch(watches.images, gulp.parallel('build:images'));
   gulp.watch(watches.extras, gulp.parallel('build:extras'));
