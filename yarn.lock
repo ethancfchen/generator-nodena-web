@@ -1239,11 +1239,11 @@ gauge@~2.7.3:
     strip-ansi "^3.0.1"
     wide-align "^1.1.0"
 
-generator-nodena@^0.7.4:
-  version "0.7.4"
-  resolved "https://registry.yarnpkg.com/generator-nodena/-/generator-nodena-0.7.4.tgz#ab2bcf9d31207b5af013f2a189df6f7e71fc7d10"
+generator-nodena@^0.7.5:
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/generator-nodena/-/generator-nodena-0.7.5.tgz#30589df2dab3e63bac1dcbbe4bba84ad99eab26e"
   dependencies:
-    chalk "^2.0.1"
+    chalk "^2.2.0"
     command-exists "^1.2.2"
     sort-package-json "^1.7.1"
     yeoman-generator "^2.0.1"
