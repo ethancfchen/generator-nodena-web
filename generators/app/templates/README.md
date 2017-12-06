@@ -431,34 +431,30 @@ module.exports = function (setup) {
 
 ## Gulp Tasks
 
-### Build/Publish
+### Build
 
-#### Build For Developement
+#### Build for Developement
 
-Build the website and open live preview with [BrowserSync][BrowserSync].
+Build and open live preview with [BrowserSync][BrowserSync].
 
 ```bash
-export NODE_ENV=development
-gulp
+NODE_ENV=development gulp
 ```
 
-#### Publish For Stage Site
+#### Build for Stage
 
-Build the website for stage, all files will generated in ```online/stage/```
-and create a version patch to ```online/patches/<version>```.
+Build a distribution for stage, all files will generated in ```dist/stage/```.
 
 ```bash
-export NODE_ENV=stage
-gulp
+NODE_ENV=stage gulp
 ```
 
-#### Publish For Production Site
+#### Build for Production
 
-Build the website for stage, all files will generated in ```online/production/```
+Build a distribution for production, all files will generated in ```dist/production/```
 
 ```bash
-export NODE_ENV=production
-gulp
+NODE_ENV=production gulp
 ```
 
 #### Build Options
@@ -471,22 +467,6 @@ Disable all compression and show detailed debug information on console.
 gulp -b
 ```
 
-##### Version (default: patch)
-
-Increace version number using [semver][semver].
-
-###### Patch
-
-```bash
-gulp release:version -v patch
-```
-
-###### Prerelease with `preid`
-
-```bash
-gulp release:version -v prerelease --preid=stage
-```
-
 ##### Port for BrowserSync (default: 8080)
 
 Manually assign the port of live preview.
@@ -495,15 +475,50 @@ Manually assign the port of live preview.
 gulp -p 8081
 ```
 
+### Helper
+
+#### Bump New Version
+
+Bump new version number to `package.json` and create a git tag.
+
+##### Prerelease => 1.0.x-stage.x
+
+```bash
+gulp version --new-version prerelease --preid stage
+```
+
+##### Patch => 1.0.x
+
+```bash
+gulp version --new-version patch
+```
+
+##### Minor => 1.x.0
+
+```bash
+gulp version --new-version minor
+```
+
+##### Major => x.0.0
+
+```bash
+gulp version --new-version major
+```
+
+##### Manually
+
+```bash
+gulp version --new-version 1.2.3
+```
+
 ### Miscellaneous
 
 #### Save Optimized Images
 
-Copy optimized images of [gulp-imagemin][gulp-imagemin] from destination folder to source folder.
+Copy optimized images of [gulp-imagemin][gulp-imagemin] from distribution folder to source folder.
 
 ```bash
-export NODE_ENV=production
-gulp save
+NODE_ENV=production gulp save
 ```
 
 #### Generate JSDoc
@@ -542,5 +557,4 @@ gulp jsdoc
 [pug-lint]: https://github.com/pugjs/pug-lint/
 [robots-generator]: https://github.com/haydenbleasel/robots-generator/
 [sass-lint]: https://github.com/sasstools/sass-lint/
-[semver]: https://github.com/npm/node-semver/
 [webpack]: https://webpack.github.io/
