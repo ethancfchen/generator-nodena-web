@@ -18,7 +18,8 @@ const _ = require('lodash');
  */
 class PluginHttpProxyMiddleware {
   constructor() {
-    const proxy = config.proxy || [];
+    const localServer = config.localServer || {};
+    const proxy = localServer.proxy || [];
 
     this.proxies = _(proxy).map((item) => {
       return {

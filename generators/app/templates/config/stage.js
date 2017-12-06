@@ -3,6 +3,7 @@ const defer = require('config/defer').deferConfig;
 
 module.exports = {
   domain: '',
+  localServer: false,
 
   /* Helper */
 

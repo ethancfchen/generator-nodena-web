@@ -8,6 +8,7 @@ module.exports = {
     'allow': ['/'],
     'disallow': [],
   },
+  localServer: false,
 
   /* Helper */
 

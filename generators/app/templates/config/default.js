@@ -3,15 +3,11 @@ const defer = require('config/defer').deferConfig;
 
 const NODE_ENV = process.env.NODE_ENV;
 const NODE_APP_INSTANCE = process.env.NODE_APP_INSTANCE;
+
 const argv = require('../setup/argv');
 
 module.exports = {
   root: '.',
-  server: {
-    port: argv.port || 8080,
-    https: false,
-    index: 'index.html',
-  },
   proxy: [],
   globals: {
     pug: {},
@@ -65,6 +61,7 @@ module.exports = {
   copy: [],
   sitemap: false,
   robots: false,
+  localServer: false,
 
   /* Helper */
 

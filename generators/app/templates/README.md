@@ -67,63 +67,6 @@ module.exports = {
 };
 ```
 
-### server
-
-Options for [BrowserSync][BrowserSync].
-
-Options:
-
-*   `port` - Default port. Default: `8080`.
-*   `https` - Enable self-signed SSL. Default: `false`.
-*   `index` - Default page. Default: `index.html`.
-
-Example:
-
-```javascript
-module.exports = {
-  server: {
-    port: 8080,
-    https: true,
-    index: 'index.html',
-  },
-};
-```
-
-### proxy
-
-Default: `[]`
-
-Assign proxy to [BrowserSync][BrowserSync].
-
-Options:
-
-*   `uri` - The URI path matching for proxy.
-*   `options` - The proxy options. See [options of proxy][node-http-proxy#options].
-
-Example:
-
-```javascript
-module.exports = {
-  proxy: [{
-    uri: '/api',
-    options: {
-      target: 'https://mydomain.com',
-      changeOrigin: true,
-      secure: false,
-    },
-  }, {
-    uri: '/upload',
-    options: {
-      target: 'http://mydomain.com',
-      changeOrigin: true,
-    },
-  }],
-};
-```
-
-All requests on `/api` will proxy to `https://mydomain.com/api`,
-and `/upload` will proxy to `https://mydomain.com/upload`
-
 ### globals
 
 Default: `null`
@@ -219,7 +162,7 @@ module.exports = {
 };
 ```
 
-#### sass
+### sass
 
 Setup for [gulp-sass][gulp-sass].
 
@@ -331,7 +274,7 @@ module.exports = {
 }
 ```
 
-#### copy
+### copy
 
 Copy files from source to destination.
 
@@ -366,6 +309,73 @@ module.exports = {
   }
 };
 ```
+
+### localServer
+
+Setup for launch a local server.
+
+#### browserSync
+
+Options for [BrowserSync][BrowserSync].
+
+Options:
+
+*   `startPath` - Start path of server. Default: `config.root`.
+*   `server.baseDir` - Base directory of server. Default: `config.assets.build`.
+*   `server.index` - Default page. Default: `index.html`.
+*   `https` - Enable self-signed SSL. Default: `false`.
+
+See [other options of BrowserSync][browser-sync#options].
+
+Example:
+
+```javascript
+module.exports = {
+  localServer: {
+    browserSync: {
+      server: {
+        index: 'index.php',
+      },
+      https: true,
+    },
+  }
+};
+```
+
+#### proxy
+
+Assign proxies as middleware of [BrowserSync][BrowserSync].
+
+Options:
+
+*   `uri` - The URI path matching for proxy.
+*   `options` - The proxy options. See [options of proxy][node-http-proxy#options].
+
+Example:
+
+```javascript
+module.exports = {
+  localServer: {
+    proxy: [{
+      uri: '/api',
+      options: {
+        target: 'https://mydomain.com',
+        changeOrigin: true,
+        secure: false,
+      },
+    }, {
+      uri: '/upload',
+      options: {
+        target: 'http://mydomain.com',
+        changeOrigin: true,
+      },
+    }],
+  },
+};
+```
+
+All requests on `/api` will proxy to `https://mydomain.com/api`,
+and `/upload` will proxy to `https://mydomain.com/upload`
 
 ## [Babel][Babel] Setup ([`.bablerc`](https://babeljs.io/docs/usage/babelrc/))
 
@@ -517,6 +527,7 @@ gulp jsdoc
 [Node.js]: https://nodejs.org/
 [Pug]: http://jade-lang.com/
 [Sass]: http://sass-lang.com/
+[browser-sync#options]: https://browsersync.io/docs/options
 [gulp-filter]: https://github.com/sindresorhus/gulp-filter/
 [gulp-imagemin]: https://github.com/sindresorhus/gulp-imagemin/
 [gulp-preprocess]: https://github.com/jas/gulp-preprocess/

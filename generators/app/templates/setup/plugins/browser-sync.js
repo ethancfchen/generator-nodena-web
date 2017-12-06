@@ -1,4 +1,6 @@
 const config = require('config');
+const _ = require('lodash');
+
 const argv = require('../argv');
 
 /**
@@ -16,25 +18,17 @@ const argv = require('../argv');
  */
 class PluginBrowserSync {
   constructor() {
-    const server = config.server || {};
-    const port = argv.port || server.port;
-    const isHttps = server.https;
+    const localServer = config.localServer || {};
+    const browserSync = localServer.browserSync || {};
 
-    this.port = port;
-    this.server = {
-      baseDir: config.assets.build,
-      index: server.index,
-    };
-    this.https = isHttps;
-    this.ui = {
-      port: port + 1,
-    };
-    this.startPath = config.root;
-
-    if (!port) {
-      delete this.port;
-      delete this.ui.port;
-    }
+    _.merge(this, {
+      startPath: config.root,
+      server: {
+        baseDir: config.assets.build,
+        index: 'index.html',
+      },
+      https: false,
+    }, browserSync);
   }
 }
 

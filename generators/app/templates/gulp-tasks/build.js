@@ -17,8 +17,8 @@ const tasks = [
   setup.sitemap ? 'build:sitemap' : null,
   setup.robots ? 'build:robots' : null,
 
-  setup.browserSync ? 'watch' : null,
-  setup.browserSync ? 'browserSync' : null,
+  setup.localServer ? 'watch' : null,
+  setup.localServer ? 'browserSync' : null,
 ].filter((task) => Boolean(task));
 
 module.exports = gulp.series(tasks, (taskDone) => {

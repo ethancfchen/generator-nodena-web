@@ -16,7 +16,7 @@ class PluginGulpPreprocess {
     const env = config.env;
     const version = assetsHelper.getPackageJsonVersion();
 
-    const filterOptions = (config.preprocess || {}).filter || {};
+    const filter = (config.preprocess || {}).filter || {};
 
     this.context = {
       ENV: env,
@@ -26,7 +26,7 @@ class PluginGulpPreprocess {
 
     /* Custom */
 
-    this.filter = filterOptions;
+    this.filter = filter;
   }
 }
 
