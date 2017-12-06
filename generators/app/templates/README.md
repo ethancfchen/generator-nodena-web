@@ -479,7 +479,7 @@ gulp -p 8081
 
 #### Bump New Version
 
-Bump new version number to `package.json` and create a git tag.
+Bump new [semver][semver] version number to `package.json` and create a git tag.
 
 ##### Prerelease => 1.0.x-stage.x
 
@@ -557,4 +557,5 @@ gulp jsdoc
 [pug-lint]: https://github.com/pugjs/pug-lint/
 [robots-generator]: https://github.com/haydenbleasel/robots-generator/
 [sass-lint]: https://github.com/sasstools/sass-lint/
+[semver]: https://github.com/npm/node-semver/
 [webpack]: https://webpack.github.io/
