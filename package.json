@@ -1,6 +1,6 @@
 {
   "name": "generator-nodena-web",
-  "version": "0.11.3",
+  "version": "0.12.0",
   "description": "Nodena web Yeoman generator",
   "keywords": [
     "front-end",
