@@ -487,14 +487,6 @@ chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0:
     escape-string-regexp "^1.0.5"
     supports-color "^4.0.0"
 
-chalk@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.2.0.tgz#477b3bf2f9b8fd5ca9e429747e37f724ee7af240"
-  dependencies:
-    ansi-styles "^3.1.0"
-    escape-string-regexp "^1.0.5"
-    supports-color "^4.0.0"
-
 chalk@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.3.0.tgz#b5ea48efc9c1793dccc9b4767c93914d3f2d52ba"
@@ -1284,11 +1276,11 @@ gauge@~2.7.3:
     strip-ansi "^3.0.1"
     wide-align "^1.1.0"
 
-generator-nodena@^0.7.5:
-  version "0.7.5"
-  resolved "https://registry.yarnpkg.com/generator-nodena/-/generator-nodena-0.7.5.tgz#30589df2dab3e63bac1dcbbe4bba84ad99eab26e"
+generator-nodena@^0.7.6:
+  version "0.7.6"
+  resolved "https://registry.yarnpkg.com/generator-nodena/-/generator-nodena-0.7.6.tgz#b7fafb6b159cfcfe27a0d40223f44cac878fa234"
   dependencies:
-    chalk "^2.2.0"
+    chalk "^2.3.0"
     command-exists "^1.2.2"
     sort-package-json "^1.7.1"
     yeoman-generator "^2.0.1"
