@@ -1,8 +1,6 @@
 const config = require('config');
 const _ = require('lodash');
 
-const argv = require('../argv');
-
 /**
  * Plugin Setup: Browsersync
  *

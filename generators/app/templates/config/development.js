@@ -1,5 +1,3 @@
-const defer = require('config/defer').deferConfig;
-
 const argv = require('../setup/argv');
 
 const serverPort = argv.port || 8080;
