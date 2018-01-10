@@ -12,7 +12,7 @@ const appAssets = [
   'gulp-tasks/build/scripts.js',
   'gulp-tasks/build/sitemap.js',
   'gulp-tasks/build/styles.js',
-  'gulp-tasks/tool/save.js',
+  'gulp-tasks/tool/imageopt.js',
   'gulp-tasks/browserSync.js',
   'gulp-tasks/watch.js',
   'config/default.js',
