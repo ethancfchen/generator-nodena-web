@@ -1,16 +1,25 @@
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
 const path = require('path');
+const _ = require('lodash');
 
-const setup = require('setup/setup');
+const config = require('config');
+
+function getOptions() {
+  const domain = config.domain;
+  const options = {};
+  _.merge(options, {
+    useragent: '*',
+    sitemap: `${domain}/sitemap.xml`,
+  }, config.robots);
+  return options;
+}
 
 module.exports = function() {
-  const assets = setup.assets;
-
+  const assets = config.assets || {};
   const src = path.join(assets.build, assets.dest.index);
-  const dest = setup.root;
-
-  const options = setup.plugins.gulpRobots;
+  const dest = config.root;
+  const options = getOptions();
 
   return gulp.src(src)
     .pipe($.robots(options))

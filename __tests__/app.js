@@ -22,7 +22,6 @@ const appAssets = [
   'setup/plugins/browser-sync.js',
   'setup/plugins/gulp-preprocess.js',
   'setup/plugins/gulp-pug.js',
-  'setup/plugins/gulp-robots.js',
   'setup/plugins/gulp-sass.js',
   'setup/plugins/http-proxy-middleware.js',
   'src/docs',
