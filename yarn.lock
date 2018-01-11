@@ -1305,14 +1305,14 @@ gauge@~2.7.3:
     strip-ansi "^3.0.1"
     wide-align "^1.1.0"
 
-generator-nodena@^0.7.6:
-  version "0.7.6"
-  resolved "https://registry.yarnpkg.com/generator-nodena/-/generator-nodena-0.7.6.tgz#b7fafb6b159cfcfe27a0d40223f44cac878fa234"
+generator-nodena@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/generator-nodena/-/generator-nodena-0.8.0.tgz#a3688455bee6a8f2accd75e25ed8275ba3ca17ae"
   dependencies:
     chalk "^2.3.0"
     command-exists "^1.2.2"
     sort-package-json "^1.7.1"
-    yeoman-generator "^2.0.1"
+    yeoman-generator "^2.0.2"
     yosay "^2.0.0"
 
 get-caller-file@^1.0.1:
@@ -4134,36 +4134,6 @@ yeoman-generator@^1.1.0:
     through2 "^2.0.0"
     user-home "^2.0.0"
     yeoman-environment "^1.1.0"
-
-yeoman-generator@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/yeoman-generator/-/yeoman-generator-2.0.1.tgz#cc6b35dec1c352f8eded1fbfce47189d6f823813"
-  dependencies:
-    async "^2.5.0"
-    chalk "^2.1.0"
-    cli-table "^0.3.1"
-    cross-spawn "^5.1.0"
-    dargs "^5.1.0"
-    dateformat "^3.0.2"
-    debug "^3.1.0"
-    detect-conflict "^1.0.0"
-    error "^7.0.2"
-    find-up "^2.1.0"
-    github-username "^4.0.0"
-    istextorbinary "^2.1.0"
-    lodash "^4.11.1"
-    make-dir "^1.0.0"
-    mem-fs-editor "^3.0.0"
-    minimist "^1.2.0"
-    pretty-bytes "^4.0.2"
-    read-chunk "^2.1.0"
-    read-pkg-up "^2.0.0"
-    rimraf "^2.6.2"
-    run-async "^2.0.0"
-    shelljs "^0.7.8"
-    text-table "^0.2.0"
-    through2 "^2.0.0"
-    yeoman-environment "^2.0.3"
 
 yeoman-generator@^2.0.2:
   version "2.0.2"
