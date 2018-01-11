@@ -3,7 +3,10 @@ const gulp = require('gulp');
 const path = require('path');
 const setup = require('setup/setup');
 
-const tasks = ['build:images'];
+const tasks = [
+  'build:clean',
+  'build:images',
+];
 
 module.exports = gulp.series(tasks, (taskDone) => {
   const assets = setup.assets;
