@@ -1,17 +1,51 @@
+const fs = require('fs');
+const path = require('path');
+const _ = require('lodash');
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
 const through = require('through2');
+const config = require('config');
 
-const path = require('path');
-const _ = require('lodash');
+const ASSETS = {
+  manifest: 'package.json',
+};
 
-const setup = require('setup/setup');
+function getVersion() {
+  const fileContent = fs.readFileSync(ASSETS.manifest, 'utf8');
+  const manifest = JSON.parse(fileContent);
+  return manifest.version;
+}
 
 function noop() {
   return through.obj();
 }
 
-function resolvePlugins(options) {
+function getSassOptions() {
+  return config.sass;
+}
+
+function getFilterOptions() {
+  return ((config.preprocess || {}).filter || {}).sass;
+}
+
+function getPreprocessOptions() {
+  const globals = (config.globals || {}).sass;
+  const options = {};
+  const defaults = {
+    context: {
+      ENV: config.env,
+      VERSION: getVersion(),
+      DOMAIN: config.domain,
+    },
+  };
+
+  _.merge(defaults.context, globals);
+  _.merge(options, defaults);
+  return options;
+}
+
+function getPostcssOptions() {
+  const options = config.postcss;
   const prefix = 'postcss-';
   return _(options).map((pluginOptions, key) => {
     const moduleName = _.kebabCase(key);
@@ -28,34 +62,41 @@ function resolvePlugins(options) {
   }).filter(_.identity).value();
 }
 
+function getOptions() {
+  return {
+    sass: getSassOptions(),
+    filter: getFilterOptions(),
+    preprocess: getPreprocessOptions(),
+    postcss: getPostcssOptions(),
+  };
+}
+
 module.exports = function() {
   const browserSync = this.context.browserSync;
 
-  const assets = setup.assets;
+  const assets = config.assets;
+  const isOnline = config.isOnline;
+  const isVerbose = config.isVerbose;
 
   const src = assets.src.styles;
-  const dest = path.join(setup.root, assets.dest.styles);
+  const dest = path.join(config.root, assets.dest.styles);
 
-  const sassOpts = setup.plugins.gulpSass;
-  const postcssOpts = resolvePlugins(setup.postcss);
-  const preprocessOpts = setup.plugins.gulpPreprocess;
+  const options = getOptions();
 
-  const sassData = (setup.globals || {}).sass;
-  const filterOpts = preprocessOpts.filter.sass;
-  const $filter = filterOpts ? $.filter(filterOpts, {restore: true}) : noop();
-  const $filterRestore = filterOpts ? $filter.restore : noop();
-
-  preprocessOpts.context = _.merge(preprocessOpts.context, sassData);
+  const $filter = options.filter ?
+    $.filter(options.filter, {restore: true}) : noop();
+  const $filterRestore = options.filter ?
+    $filter.restore : noop();
 
   return gulp.src(src, {cwd: assets.base.src})
-    .pipe($.if(!setup.isOnline, $.plumber()))
-    .pipe($.if(setup.isVerbose, $.sourcemaps.init()))
-    .pipe($.sass(sassOpts).on('error', $.sass.logError))
+    .pipe($.if(!isOnline, $.plumber()))
+    .pipe($.if(isVerbose, $.sourcemaps.init()))
+    .pipe($.sass(options.sass).on('error', $.sass.logError))
     .pipe($filter)
-    .pipe($.preprocess(preprocessOpts))
+    .pipe($.preprocess(options.preprocess))
     .pipe($filterRestore)
-    .pipe($.postcss(postcssOpts))
-    .pipe($.if(setup.isVerbose, $.sourcemaps.write('.')))
+    .pipe($.postcss(options.postcss))
+    .pipe($.if(isVerbose, $.sourcemaps.write('.')))
     .pipe(gulp.dest(dest, {cwd: assets.build}))
     .pipe(browserSync.stream());
 };
