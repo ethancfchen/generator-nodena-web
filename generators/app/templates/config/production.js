@@ -5,8 +5,8 @@ module.exports = {
   domain: '',
   sitemap: true,
   robots: {
-    'allow': ['/'],
-    'disallow': [],
+    allow: ['/'],
+    disallow: [],
   },
   localServer: false,
 
