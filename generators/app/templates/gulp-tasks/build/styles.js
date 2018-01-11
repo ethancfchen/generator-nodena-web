@@ -11,8 +11,10 @@ const ASSETS = {
 };
 
 function getVersion() {
-  const fileContent = fs.readFileSync(ASSETS.manifest, 'utf8');
-  const manifest = JSON.parse(fileContent);
+  const assets = config.assets;
+  const file = assets.manifest || ASSETS.manifest;
+  const content = fs.readFileSync(file, 'utf8');
+  const manifest = JSON.parse(content);
   return manifest.version;
 }
 
