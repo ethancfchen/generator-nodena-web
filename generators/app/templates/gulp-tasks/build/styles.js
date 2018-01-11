@@ -1,10 +1,15 @@
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
+const through = require('through2');
 
 const path = require('path');
 const _ = require('lodash');
 
 const setup = require('setup/setup');
+
+function noop() {
+  return through.obj();
+}
 
 function resolvePlugins(options) {
   const prefix = 'postcss-';
@@ -36,11 +41,9 @@ module.exports = function() {
   const preprocessOpts = setup.plugins.gulpPreprocess;
 
   const sassData = (setup.globals || {}).sass;
-  const filterOptions = preprocessOpts.filter.sass;
-  const $filter = filterOptions ?
-    $.filter(filterOptions, {restore: true}) :
-    $.util.noop();
-  const $filterRestore = filterOptions ? $filter.restore : $.util.noop();
+  const filterOpts = preprocessOpts.filter.sass;
+  const $filter = filterOpts ? $.filter(filterOpts, {restore: true}) : noop();
+  const $filterRestore = filterOpts ? $filter.restore : noop();
 
   preprocessOpts.context = _.merge(preprocessOpts.context, sassData);
 

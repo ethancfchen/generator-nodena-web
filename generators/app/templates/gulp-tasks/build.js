@@ -1,5 +1,5 @@
 const gulp = require('gulp');
-const gutil = require('gulp-util');
+const log = require('fancy-log');
 const chalk = require('chalk');
 
 const setup = require('setup/setup');
@@ -22,6 +22,6 @@ const tasks = [
 ].filter((task) => Boolean(task));
 
 module.exports = gulp.series(tasks, (taskDone) => {
-  gutil.log(chalk.green('Build Completed.'));
+  log(chalk.green('Build Completed.'));
   taskDone();
 });

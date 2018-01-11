@@ -1,9 +1,14 @@
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
+const through = require('through2');
 
 const _ = require('lodash');
 
 const setup = require('setup/setup');
+
+function noop() {
+  return through.obj();
+}
 
 module.exports = function() {
   const browserSync = this.context.browserSync;
@@ -14,10 +19,8 @@ module.exports = function() {
   const extrasData = (setup.globals || {}).extras;
   const isPreprocess = !_.isEmpty(extrasData);
   const filterOpts = preprocessOpts.filter.extras;
-  const $filter = filterOpts ?
-    $.filter(filterOpts, {restore: true}) :
-    $.util.noop();
-  const $filterRestore = filterOpts ? $filter.restore : $.util.noop();
+  const $filter = filterOpts ? $.filter(filterOpts, {restore: true}) : noop();
+  const $filterRestore = filterOpts ? $filter.restore : noop();
 
   const src = assets.src.extras;
   const dest = setup.root;
