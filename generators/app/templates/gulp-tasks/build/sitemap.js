@@ -1,16 +1,15 @@
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
-
-const setup = require('setup/setup');
+const config = require('config');
 
 module.exports = function() {
-  const assets = setup.assets;
+  const assets = config.assets;
 
   const src = '**/*.html';
-  const dest = setup.root;
+  const dest = config.root;
 
   const options = {
-    siteUrl: setup.domain,
+    siteUrl: config.domain,
   };
 
   return gulp.src(src, {cwd: assets.build})

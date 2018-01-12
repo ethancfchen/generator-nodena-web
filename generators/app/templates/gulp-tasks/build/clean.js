@@ -1,9 +1,8 @@
 const del = require('del');
-
-const setup = require('setup/setup');
+const config = require('config');
 
 module.exports = function() {
-  const assets = setup.assets;
+  const assets = config.assets;
   return del([
     assets.build,
   ]);

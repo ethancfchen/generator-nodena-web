@@ -1,10 +1,8 @@
-const gulp = require('gulp');
-const $ = require('gulp-load-plugins')();
-
 const path = require('path');
 const _ = require('lodash');
-
-const setup = require('setup/setup');
+const gulp = require('gulp');
+const $ = require('gulp-load-plugins')();
+const config = require('config');
 
 function resolvePlugins(options) {
   const prefix = 'imagemin-';
@@ -24,20 +22,21 @@ function resolvePlugins(options) {
 }
 
 module.exports = function() {
-  const browserSync = this.context.browserSync;
+  const localServer = this.context.localServer;
 
-  const assets = setup.assets;
+  const assets = config.assets;
+  const isOnline = config.isOnline;
 
   const src = assets.src.images;
-  const dest = path.join(setup.root, assets.dest.images);
+  const dest = path.join(config.root, assets.dest.images);
 
-  const imageminOpts = setup.imagemin;
+  const imageminOpts = config.imagemin;
 
   const plugins = resolvePlugins(imageminOpts.plugins);
 
   return gulp.src(src, {cwd: assets.base.src})
-    .pipe($.if(!setup.isOnline, $.plumber()))
-    .pipe($.if(setup.isOnline, $.imagemin(plugins, imageminOpts.main)))
+    .pipe($.if(!isOnline, $.plumber()))
+    .pipe($.if(isOnline, $.imagemin(plugins, imageminOpts.main)))
     .pipe(gulp.dest(dest, {cwd: assets.build}))
-    .pipe(browserSync.stream());
+    .pipe(localServer.stream());
 };

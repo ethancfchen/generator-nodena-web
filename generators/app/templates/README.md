@@ -16,38 +16,30 @@
 
 ## File Structure
 
-|        File/Directory         |                         Description                         |
-| ----------------------------- | ----------------------------------------------------------- |
-| `gulp-tasks/`                 | [Gulp][Gulp] task definitions                               |
-| `config/`                     | [Config][node-config] files                                 |
-| `setup/`                      | Project setup helpers                                       |
-| `setup/base/`                 | Project setup base                                          |
-| `setup/base/assets-helper.js` | Project assets helper                                       |
-| `setup/base/plugins.js`       | Project plugin setup helper                                 |
-| `setup/plugins/`              | Project plugin setup details                                |
-| `setup/assets.js`             | Extended project assets                                     |
-| `setup/plugins.js`            | Extended project plugin setups                              |
-| `setup/setup.js`              | Main setup helpers                                          |
-| `src/`                        | Source files                                                |
-| `src/docs/`                   | HTML document sources                                       |
-| `src/sass/`                   | Stylesheet sources                                          |
-| `src/js/`                     | Script sources                                              |
-| `src/img/`                    | Images sources                                              |
-| `src/extras/`                 | `favicon` and `sitemap.xml` etc.                            |
-| `build/`                      | Build files for developement/debug                          |
-| `dist/`                       | Distribution files for online sites                         |
-| `docs/`                       | [JSDoc][JSDoc] generated files                              |
-| `node_modules/`               | Dependent packages for Node.js                              |
-| `.editorconfig`               | Editor config file for editors                              |
-| `.eslintignore`               | Ignored files list for [ESlint][ESlint]                     |
-| `.eslintrc.js`                | Setup file for [ESlint][ESlint]                             |
-| `.gitignore`                  | Ignored files list for [Git][Git]                           |
-| `.pug-lintrc`                 | Setup file for [pug-lint][pug-lint]                         |
-| `.sass-lint.yml`              | Setup file for [sass-lint][sass-lint]                       |
-| `gulpfile.js`                 | Project main workflow                                       |
-| `gulptasks.js`                | Custom task loader for [gulp-task-loader][gulp-task-loader] |
-| `package.json`                | Project meta information                                    |
-| `README.md`                   | This readme file                                            |
+| File/Directory   | Description                                                 |
+| ---------------- | ----------------------------------------------------------- |
+| `gulp-tasks/`    | [Gulp][Gulp] task definitions                               |
+| `config/`        | [Config][node-config] files                                 |
+| `src/`           | Source files                                                |
+| `src/docs/`      | HTML document sources                                       |
+| `src/sass/`      | Stylesheet sources                                          |
+| `src/js/`        | Script sources                                              |
+| `src/img/`       | Images sources                                              |
+| `src/extras/`    | `favicon` and `sitemap.xml` etc.                            |
+| `build/`         | Build files for developement/debug                          |
+| `dist/`          | Distribution files for online sites                         |
+| `docs/`          | [JSDoc][JSDoc] generated files                              |
+| `node_modules/`  | Dependent packages for Node.js                              |
+| `.editorconfig`  | Editor config file for editors                              |
+| `.eslintignore`  | Ignored files list for [ESlint][ESlint]                     |
+| `.eslintrc.js`   | Setup file for [ESlint][ESlint]                             |
+| `.gitignore`     | Ignored files list for [Git][Git]                           |
+| `.pug-lintrc`    | Setup file for [pug-lint][pug-lint]                         |
+| `.sass-lint.yml` | Setup file for [sass-lint][sass-lint]                       |
+| `gulpfile.js`    | Project main workflow                                       |
+| `gulptasks.js`   | Custom task loader for [gulp-task-loader][gulp-task-loader] |
+| `package.json`   | Project meta information                                    |
+| `README.md`      | This readme file                                            |
 
 ## Environment Setup (`config/*`)
 
@@ -387,7 +379,7 @@ Note that this will also enable the global `strict` mode.
 
 Create `webpack.config.js` on project root to process JavaScript files using [webpack][webpack].
 
-The project setup helper will inject in config file as function argument.
+The project config will inject in config file as function argument.
 
 Example: Normal configuration
 
@@ -397,15 +389,15 @@ module.exports = {
 };
 ```
 
-Example: Inject with project setup helper
+Example: Inject with project config
 
 ```javascript
 var path = require('path');
 var webpack = require('webpack');
 
-module.exports = function (setup) {
+module.exports = function (config) {
   return {
-    devtool: setup.isVerbose ? 'inline-source-map' : null,
+    devtool: config.isVerbose ? 'inline-source-map' : null,
 
     // Other settings
 
@@ -414,12 +406,12 @@ module.exports = function (setup) {
         $: 'jquery',
         jQuery: 'jquery'
       })
-    ].concat(setup.isOnline ? [
+    ].concat(config.isOnline ? [
       new webpack.LoaderOptionsPlugin({
         minimize: true
       }),
       new UglifyJSPlugin({
-        sourceMap: setup.isVerbose,
+        sourceMap: config.isVerbose,
         compress: {
           warnings: false
         }

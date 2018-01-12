@@ -1,12 +1,10 @@
 const gulp = require('gulp');
-
 const path = require('path');
 const bsHtmlInjector = require('bs-html-injector');
-
-const setup = require('setup/setup');
+const config = require('config');
 
 module.exports = function(taskDone) {
-  const assets = setup.assets;
+  const assets = config.assets;
 
   const watches = assets.watch;
 

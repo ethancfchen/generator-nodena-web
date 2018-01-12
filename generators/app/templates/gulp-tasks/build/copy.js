@@ -1,18 +1,15 @@
+const path = require('path');
 const gulp = require('gulp');
 const merge = require('merge-stream');
-
-const path = require('path');
-
-const setup = require('setup/setup');
+const config = require('config');
 
 module.exports = function(taskDone) {
-  const assets = setup.assets;
-
+  const assets = config.assets;
   const streams = [];
 
-  (setup.copy || []).forEach((target) => {
+  Array.prototype.forEach.call(config.copy || [], (target) => {
     const src = target.src;
-    const dest = path.join(setup.root, target.dest || '');
+    const dest = path.join(config.root, target.dest || '');
     streams.push(
       gulp.src(src)
         .pipe(gulp.dest(dest, {cwd: assets.build}))

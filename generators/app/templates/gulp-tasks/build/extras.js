@@ -52,7 +52,7 @@ function getOptions() {
 }
 
 module.exports = function() {
-  const browserSync = this.context.browserSync;
+  const localServer = this.context.localServer;
 
   const assets = config.assets;
 
@@ -72,5 +72,5 @@ module.exports = function() {
     .pipe($.if(isPreprocess, $.preprocess(options.preprocess)))
     .pipe($.if(isPreprocess, $filterRestore))
     .pipe(gulp.dest(dest, {cwd: assets.build}))
-    .pipe(browserSync.stream());
+    .pipe(localServer.stream());
 };

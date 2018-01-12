@@ -74,7 +74,7 @@ function getOptions() {
 }
 
 module.exports = function() {
-  const browserSync = this.context.browserSync;
+  const localServer = this.context.localServer;
 
   const assets = config.assets;
   const isOnline = config.isOnline;
@@ -100,5 +100,5 @@ module.exports = function() {
     .pipe($.postcss(options.postcss))
     .pipe($.if(isVerbose, $.sourcemaps.write('.')))
     .pipe(gulp.dest(dest, {cwd: assets.build}))
-    .pipe(browserSync.stream());
+    .pipe(localServer.stream());
 };

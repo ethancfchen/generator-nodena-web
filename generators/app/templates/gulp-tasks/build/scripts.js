@@ -67,7 +67,7 @@ function getOptions() {
 }
 
 module.exports = function() {
-  const browserSync = this.context.browserSync;
+  const localServer = this.context.localServer;
 
   const assets = config.assets;
   const isOnline = config.isOnline;
@@ -90,7 +90,7 @@ module.exports = function() {
       .pipe($.if(!isOnline, $.plumber()))
       .pipe(webpackStream({config: options.webpack}, webpack))
       .pipe(gulp.dest(dest, {cwd: assets.build}))
-      .pipe(browserSync.stream());
+      .pipe(localServer.stream());
   }
 
   return gulp.src(src, {cwd: assets.base.src})
@@ -105,5 +105,5 @@ module.exports = function() {
     .on('error', (err) => console.error(err))
     .pipe($.if(isVerbose, $.sourcemaps.write()))
     .pipe(gulp.dest(dest, {cwd: assets.build}))
-    .pipe(browserSync.stream());
+    .pipe(localServer.stream());
 };

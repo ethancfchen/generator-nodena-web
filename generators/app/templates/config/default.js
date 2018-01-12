@@ -125,7 +125,6 @@ module.exports = {
     jsdoc: {
       files: [
         './*.js',
-        './setup/**/*.js',
       ],
       dest: 'doc',
     },

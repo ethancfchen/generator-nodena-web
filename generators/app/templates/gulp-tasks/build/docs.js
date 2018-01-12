@@ -42,7 +42,7 @@ function getOptions() {
 }
 
 module.exports = function() {
-  const browserSync = this.context.browserSync;
+  const localServer = this.context.localServer;
 
   const assets = config.assets;
   const isOnline = config.isOnline;
@@ -56,5 +56,5 @@ module.exports = function() {
     .pipe($.if(!isOnline, $.plumber()))
     .pipe($.pug(options))
     .pipe(gulp.dest(dest, {cwd: assets.build}))
-    .pipe(browserSync.stream());
+    .pipe(localServer.stream());
 };

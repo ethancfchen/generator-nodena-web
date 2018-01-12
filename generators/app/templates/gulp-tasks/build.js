@@ -1,8 +1,7 @@
 const gulp = require('gulp');
 const log = require('fancy-log');
 const chalk = require('chalk');
-
-const setup = require('setup/setup');
+const config = require('config');
 
 const tasks = [
   'build:clean',
@@ -14,11 +13,11 @@ const tasks = [
     'build:images',
     'build:extras',
   ]),
-  setup.sitemap ? 'build:sitemap' : null,
-  setup.robots ? 'build:robots' : null,
+  config.sitemap ? 'build:sitemap' : null,
+  config.robots ? 'build:robots' : null,
 
-  setup.localServer ? 'watch' : null,
-  setup.localServer ? 'browserSync' : null,
+  config.localServer ? 'watch' : null,
+  config.localServer ? 'localServer' : null,
 ].filter((task) => Boolean(task));
 
 module.exports = gulp.series(tasks, (taskDone) => {
