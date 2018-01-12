@@ -12,7 +12,6 @@ const argv = require('yargs').option({
 
 module.exports = {
   root: '.',
-  proxy: [],
   globals: {
     pug: {},
     sass: {},
