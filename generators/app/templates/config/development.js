@@ -1,14 +1,12 @@
-const argv = require('../setup/argv');
-
-const serverPort = argv.port || 8080;
+const SERVER_PORT = 8080;
 
 module.exports = {
-  domain: `http://localhost:${serverPort}`,
+  domain: `http://localhost:${SERVER_PORT}`,
   localServer: {
     browserSync: {
-      port: serverPort,
+      port: SERVER_PORT,
       ui: {
-        port: serverPort + 1,
+        port: SERVER_PORT + 1,
       },
     },
   },

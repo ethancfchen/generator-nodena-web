@@ -4,7 +4,11 @@ const defer = require('config/defer').deferConfig;
 const NODE_ENV = process.env.NODE_ENV;
 const NODE_APP_INSTANCE = process.env.NODE_APP_INSTANCE;
 
-const argv = require('../setup/argv');
+const argv = require('yargs').option({
+  b: {
+    alias: 'verbose',
+  },
+}).argv;
 
 module.exports = {
   root: '.',

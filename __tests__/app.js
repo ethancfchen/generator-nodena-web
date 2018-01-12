@@ -20,8 +20,6 @@ const appAssets = [
   'config/stage.js',
   'config/production.js',
   'setup/plugins/browser-sync.js',
-  'setup/plugins/gulp-preprocess.js',
-  'setup/plugins/gulp-pug.js',
   'setup/plugins/http-proxy-middleware.js',
   'src/docs',
   'src/extras',
