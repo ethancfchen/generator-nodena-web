@@ -50,17 +50,22 @@ function getPostcssOptions() {
   const options = config.postcss;
   const prefix = 'postcss-';
   return _(options).map((pluginOptions, key) => {
-    const moduleName = _.kebabCase(key);
-    let modulePath = null;
+    const pluginName = _.kebabCase(key);
+    let pluginPath = null;
+    let plugin = null;
     if (!pluginOptions) {
       return null;
     }
     try {
-      modulePath = require.resolve(`${prefix}${moduleName}`);
+      pluginPath = require.resolve(`${prefix}${pluginName}`);
     } catch (e) {
-      modulePath = require.resolve(moduleName);
+      pluginPath = require.resolve(pluginName);
     }
-    return require(modulePath)(pluginOptions);
+    plugin = require(pluginPath);
+    if (typeof plugin === 'function') {
+      return plugin(pluginOptions);
+    }
+    return plugin;
   }).filter(_.identity).value();
 }
 
