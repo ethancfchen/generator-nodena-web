@@ -1,3 +1,4 @@
+const fs = require('fs');
 const path = require('path');
 const defer = require('config/defer').deferConfig;
 
@@ -70,6 +71,7 @@ module.exports = {
 
   env: NODE_ENV,
   appInstance: NODE_APP_INSTANCE,
+  version: getVersion(),
   isOnline: false,
   isVerbose: argv.verbose,
 
@@ -136,3 +138,12 @@ module.exports = {
     readme: 'README.md',
   },
 };
+
+function getVersion() {
+  const file = defer((config) => {
+    return config.assets.manifest;
+  });
+  const content = fs.readFileSync(file, 'utf8');
+  const manifest = JSON.parse(content);
+  return manifest.version;
+}
