@@ -71,7 +71,7 @@ module.exports = {
 
   env: NODE_ENV,
   appInstance: NODE_APP_INSTANCE,
-  version: getVersion(),
+  version: defer((config) => getVersion(config)),
   isOnline: false,
   isVerbose: argv.verbose,
 
@@ -94,11 +94,6 @@ module.exports = {
     build: defer((config) => {
       return config.assets.base.build;
     }),
-    dist: {
-      patches: defer((config) => {
-        return path.join(config.assets.base.dist, 'patches');
-      }),
-    },
     dest: {
       docs: '**/*.html',
       styles: 'css',
@@ -139,10 +134,8 @@ module.exports = {
   },
 };
 
-function getVersion() {
-  const file = defer((config) => {
-    return config.assets.manifest;
-  });
+function getVersion(config) {
+  const file = config.assets.manifest;
   const content = fs.readFileSync(file, 'utf8');
   const manifest = JSON.parse(content);
   return manifest.version;
