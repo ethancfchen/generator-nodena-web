@@ -17,7 +17,7 @@ function getOptions() {
 
 module.exports = function() {
   const assets = config.assets || {};
-  const src = path.join(assets.build, assets.dest.index);
+  const src = path.join(assets.build, config.root, assets.dest.index);
   const dest = config.root;
   const options = getOptions();
 
