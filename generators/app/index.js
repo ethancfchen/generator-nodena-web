@@ -28,7 +28,8 @@ const ASSETS = {
   copyTpl: [
     '.editorconfig',
     '.pug-lintrc',
-    '.sass-lint.yml',
+    '.stylelintrc.js',
+    '.stylelintignore',
     'README.md',
     'gulptasks.js',
   ],

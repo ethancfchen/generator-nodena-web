@@ -28,7 +28,8 @@ const appAssets = [
   '.eslintrc.js',
   '.gitignore',
   '.pug-lintrc',
-  '.sass-lint.yml',
+  '.stylelintignore',
+  '.stylelintrc.js',
   'README.md',
   'gulptasks.js',
 ];
